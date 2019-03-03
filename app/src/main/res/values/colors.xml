@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!--PALETA DE COLORES-->
+    <color name="colorPDark">#0076BF</color>
+    <color name="colorPLight">#03A9F4</color>
+    <color name="colorPText">#C8C8C8</color>
+    <color name="colorSText">#FFFFFF</color>
+    <color name="colorDivider">#7B7B7B</color>
 </resources>

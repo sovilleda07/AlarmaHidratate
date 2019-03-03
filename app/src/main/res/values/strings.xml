@@ -6,4 +6,15 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Textos de Menu -->
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_contenedor">Contenedores</string>
+    <string name="nav_configuracion">Configuración</string>
+    <string name="nav_informacion">Información</string>
+
+    <!-- Textos de prueba -->
+    <string name="text_informacion">Informacion</string>
+    <string name="text_configuracion">Configuracion</string>
+    <string name="text_contenedores">Contenedores</string>
 </resources>
