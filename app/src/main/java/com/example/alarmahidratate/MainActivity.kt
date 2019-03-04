@@ -1,27 +1,35 @@
 package com.example.alarmahidratate
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.example.alarmahidratate.Fragments.FragmentConfiguracion
+import com.example.alarmahidratate.Fragments.FragmentContenedores
+import com.example.alarmahidratate.Fragments.FragmentInformacion
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, FragmentConfiguracion.OnFragmentInteractionListener, FragmentContenedores.OnFragmentInteractionListener, FragmentInformacion.OnFragmentInteractionListener {
+    override fun onFragmentInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -63,20 +71,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_contenedor -> {
-
-
+                /*Cargar los fragments en el MainActivity*/
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout, FragmentContenedores()).commit()
             }
             R.id.nav_configuration -> {
-
-
+                /*Cargar los fragments en el MainActivity*/
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout, FragmentConfiguracion()).commit()
             }
             R.id.nav_information -> {
-
-
+                /*Cargar los fragments en el MainActivity*/
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout, FragmentInformacion()).commit()
             }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 }
