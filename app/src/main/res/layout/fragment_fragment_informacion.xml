@@ -5,18 +5,77 @@
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
                                              tools:context=".Fragments.FragmentInformacion"
-                                             android:id="@+id/frameLayout4">
+                                             android:id="@+id/frameLayout4"
+                                             android:orientation="vertical"
+>
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+            android:src="@drawable/logo"
+            android:layout_width="143dp"
+            android:layout_height="125dp"
+            android:id="@+id/ivLogo"
+            android:contentDescription="@string/logo"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+    />
     <TextView
-            android:text="@string/text_informacion"
+            android:text="@string/valoracion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvInformación" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:textSize="24sp"
-            android:textStyle="bold|italic"/>
-
+            android:id="@+id/tvCalificacion"
+            android:textSize="24sp" android:textStyle="bold"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/ivLogo"/>
+    <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            android:numStars="5" android:rating="4.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.496"
+            android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/tvCalificacion"/>
+    <TextView
+            android:text="@string/desarrollada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDesarrollada"
+            android:textStyle="normal|bold"
+            android:textSize="24sp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            app:layout_constraintHorizontal_bias="0.471" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar"/>
+    <TextView
+            android:text="@string/soda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvSonia"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.493"
+            android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/tvDesarrollada"
+            app:fontFamily="cursive"/>
+    <TextView
+            android:text="@string/periodo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvUnicah"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            app:layout_constraintHorizontal_bias="0.497"
+            android:layout_marginTop="36dp" app:layout_constraintTop_toBottomOf="@+id/tvSonia"/>
 </android.support.constraint.ConstraintLayout>
