@@ -30,6 +30,10 @@
     <string name="clase">Inteligencia Artificial</string>
     <string name="periodo">UNICAH IP 2019 </string>
 
+    <!--Texto para Fragment Contenedores-->
+    <string name="contenedor">Vaso</string>
+    <string name="medida">150 ml</string>
+    <string name="cambiar">Modificar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
