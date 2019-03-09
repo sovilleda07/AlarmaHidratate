@@ -9,23 +9,16 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".DatosGenerales">
-        </activity>
         <activity
-                android:name=".DatosInicio"
-                android:label="@string/title_activity_datos_inicio"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-                android:name=".Datos"
-                android:label="@string/title_activity_datos"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+                android:name=".DatosGenerales"
+                android:screenOrientation="portrait"/>
         <activity
                 android:name=".SplashScreen"
-                android:theme="@style/AppTheme.Launcher">
+                android:theme="@style/AppTheme.Launcher"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
@@ -33,7 +26,8 @@
         <activity
                 android:name=".MainActivity"
                 android:label="@string/app_name"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

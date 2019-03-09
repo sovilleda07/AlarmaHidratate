@@ -11,20 +11,16 @@
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="627dp"
+            android:layout_height="681dp"
             android:id="@+id/frameLayout"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginTop="44dp"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvNombreMain" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/frameLayout" app:fontFamily="@font/roboto"
-            android:textSize="18sp" android:textStyle="bold" android:text="@string/hello_blank_fragment"/>
+            app:layout_constraintTop_toTopOf="parent">
+        <TextView
+                android:text="@string/hello_blank_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/tvNombreMain" app:fontFamily="@font/roboto"
+                android:textStyle="bold"/>
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>
