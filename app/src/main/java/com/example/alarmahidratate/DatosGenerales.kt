@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_datos_generales.*
-import kotlinx.android.synthetic.main.content_main.*
 
 class DatosGenerales : AppCompatActivity() {
 
@@ -24,7 +23,7 @@ class DatosGenerales : AppCompatActivity() {
 
 //  Funcion para validar el ingreso de todos lo datos
     fun validarCampos(){
-        var genero : String
+        val genero : String
         if (etNombre.text.toString().isEmpty() || etPeso.text.toString().isEmpty() || !(rbFemenino.isChecked || rbMasculino.isChecked)) {
             Toast.makeText(this,"Ingrese todos los datos",Toast.LENGTH_LONG).show()
         }else{
@@ -38,9 +37,9 @@ class DatosGenerales : AppCompatActivity() {
                 genero = "Masculino"
             }
 
-            var nombre : String = etNombre.text.toString()
-            var peso : Float = etPeso.text.toString().toFloat()
-            val intent: Intent = Intent(this, MainActivity::class.java)
+            val nombre : String = etNombre.text.toString()
+            val peso : Float = etPeso.text.toString().toFloat()
+            val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Nombre",nombre)
             intent.putExtra("Peso", peso)
             intent.putExtra("Genero", genero)
