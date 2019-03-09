@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AlarmaHidratate</string>
+    <string name="app_name">Alarma Hidratate</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <!--<string name="nav_header_title">Android Studio</string>-->
@@ -28,12 +28,28 @@
     <string name="desarrollada">Desarrollada por:</string>
     <string name="soda">Sonia Villeda</string>
     <string name="clase">Inteligencia Artificial</string>
-    <string name="periodo">UNICAH IP 2019 </string>
+    <string name="periodo">UNICAH IP 2019</string>
 
     <!--Texto para Fragment Contenedores-->
     <string name="contenedor">Vaso</string>
     <string name="medida">150 ml</string>
     <string name="cambiar">Modificar</string>
+
+    <!--Texto para Datos Generales-->
+    <string name="ingrese">¡BIENVENIDO!</string>
+    <string name="nombre">Nombre</string>
+    <string name="ingreseNombre">Ingrese su Nombre</string>
+    <string name="genero">Genero</string>
+    <string name="femenino">Femenino</string>
+    <string name="masculino">Masculino</string>
+    <string name="peso">Peso</string>
+    <string name="ingresePeso">Ingrese su Peso</string>
+    <string name="aceptar">Aceptar</string>
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_datos">Datos</string>
+    <string name="title_activity_datos_inicio">DatosInicio</string>
 </resources>
