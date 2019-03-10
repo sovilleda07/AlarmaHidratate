@@ -46,6 +46,11 @@
     <string name="ingresePeso">Ingrese su Peso</string>
     <string name="aceptar">Aceptar</string>
 
+    <!--Texto para Fragments del Swipe Tabs-->
+    <string name="primer">Primer Fragment</string>
+    <string name="segundo">Segundo Fragment</string>
+    <string name="tercer">Tercer Fragment</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
