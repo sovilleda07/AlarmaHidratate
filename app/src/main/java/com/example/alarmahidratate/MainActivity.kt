@@ -5,16 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.support.v7.widget.Toolbar
 import com.example.alarmahidratate.Fragments.FragmentConfiguracion
 import com.example.alarmahidratate.Fragments.FragmentContenedores
 import com.example.alarmahidratate.Fragments.FragmentInformacion
@@ -27,8 +22,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +43,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        supportFragmentManager.beginTransaction().add(R.id.contenedor,FragmentTabs()).commit()
+        val fragmento : Fragment = FragmentTabs()
+        supportFragmentManager.beginTransaction().add(R.id.content_main,fragmento).commit()
 
         nav_view.setNavigationItemSelectedListener(this)
     }
@@ -85,19 +79,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_inicio -> {
                 /*Cargar los fragments en el MainActivity*/
-                supportFragmentManager.beginTransaction().replace(R.id.contenedor, FragmentTabs()).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.content_main, FragmentTabs()).commit()
             }
             R.id.nav_contenedor -> {
                 /*Cargar los fragments en el MainActivity*/
-                supportFragmentManager.beginTransaction().replace(R.id.contenedor, FragmentContenedores()).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.content_main, FragmentContenedores()).commit()
             }
             R.id.nav_configuration -> {
                 /*Cargar los fragments en el MainActivity*/
-                supportFragmentManager.beginTransaction().replace(R.id.contenedor, FragmentConfiguracion()).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.content_main, FragmentConfiguracion()).commit()
             }
             R.id.nav_information -> {
                 /*Cargar los fragments en el MainActivity*/
-                supportFragmentManager.beginTransaction().replace(R.id.contenedor, FragmentInformacion()).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.content_main, FragmentInformacion()).commit()
             }
         }
 
