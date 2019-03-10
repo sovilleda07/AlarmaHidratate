@@ -7,10 +7,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.example.alarmahidratate.Datos
 
 import com.example.alarmahidratate.R
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -30,12 +31,18 @@ class FragmentTabs : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    // Inicialización de variables que manejarán el layout
+    var tvConsumoEsperado: TextView? = null
+    var tvNombreMain: TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
@@ -43,10 +50,25 @@ class FragmentTabs : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_tabs, container, false)
+        val v = inflater.inflate(R.layout.fragment_fragment_tabs, container, false)
+
+        // Variable que obtendrá el valor de consumo esperado por medio de una
+        // función estática en la clase Datos.
+        val agua = Datos.consumoAgua(Datos.peso,Datos.genero)
+
+        // Mapear las variables a las vistas del layout
+        tvConsumoEsperado = v.findViewById(R.id.tvConsumoEsperado)
+        tvNombreMain = v.findViewById(R.id.tvNombreMain)
+
+        // Asignar los valores de la clase Datos
+        tvConsumoEsperado?.text = agua.toString()
+        tvNombreMain?.text = Datos.nombre
+
+        // Retornamos la vista para inflarla
+        return  v
+
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }
@@ -56,7 +78,7 @@ class FragmentTabs : Fragment() {
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener") as Throwable
+            throw RuntimeException("$context must implement OnFragmentInteractionListener") as Throwable
         }
     }
 

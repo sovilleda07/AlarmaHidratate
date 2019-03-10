@@ -1,6 +1,5 @@
 package com.example.alarmahidratate
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -16,7 +15,7 @@ import com.example.alarmahidratate.Fragments.FragmentInformacion
 import com.example.alarmahidratate.Fragments.FragmentTabs
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_main.*
+//import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, FragmentConfiguracion.OnFragmentInteractionListener, FragmentContenedores.OnFragmentInteractionListener, FragmentInformacion.OnFragmentInteractionListener, FragmentTabs.OnFragmentInteractionListener {
     override fun onFragmentInteraction(uri: Uri) {
@@ -27,14 +26,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        val objetoIntent : Intent = intent
-        val elNombre = objetoIntent.getIntExtra("Consumo",0)
-        tvNombreM.text = elNombre.toString()
-
-/*        val bundle : Bundle
-        bundle.putInt("Consumo",elNombre)*/
-
 
 
 //        fab.setOnClickListener { view ->
@@ -48,6 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
+        // Cargamos el fragmente inicial
         val fragmento : Fragment = FragmentTabs()
         supportFragmentManager.beginTransaction().add(R.id.content_main,fragmento).commit()
 

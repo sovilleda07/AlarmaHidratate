@@ -15,51 +15,39 @@ class DatosGenerales : AppCompatActivity() {
 
         bAceptar.setOnClickListener{
 
+            // Llamamos a la función para validar el ingreso de los campos
+            // y el calculo del consumo esperado
             validarCampos()
 
         }
 
     }
 
-//  Funcion para validar el ingreso de todos lo datos
-private fun validarCampos(){
-        val genero : String
+    //  Funcion para validar el ingreso de todos lo datos
+    private fun validarCampos(){
+        // Variable par almacenar el valor al seleccionar el RadioButton
+        var genero = ""
+
+        //Validar campos llenos
         if (etNombre.text.toString().isEmpty() || etPeso.text.toString().isEmpty() || !(rbFemenino.isChecked || rbMasculino.isChecked)) {
             Toast.makeText(this,"Ingrese todos los datos",Toast.LENGTH_LONG).show()
         }else{
 
-            genero = when {
-                rbFemenino.isChecked -> "Femenino"
-                else -> "Masculino"
-            }
+            // Evaluación de la selección de RadioButton
+            if (rbFemenino.isChecked) {
+                genero = "Femenino"
+            } else if (rbMasculino.isChecked){
+                genero = "Masculino"}
 
-            val nombre : String = etNombre.text.toString()
-            val peso = etPeso.text.toString()
+            // Damos valor a las variables estáticas de la clase Datos
+            Datos.nombre = etNombre.text.toString()
+            Datos.genero = genero
+            Datos.peso = etPeso.text.toString().toDouble()
 
-            // Llamamos a la función para calcular el consumo de Agua esperado
-            val agua = consumoAgua(peso.toFloat(),genero)
-
+            // Pasar a la otra actividad
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("Nombre",nombre)
-            intent.putExtra("Peso", peso)
-            intent.putExtra("Genero", genero)
-            intent.putExtra("Consumo", agua)
-
             startActivity(intent)
             finish()
         }
     }
 }
-
-
-    // Función para calular el consumo de agua ideal
-fun consumoAgua(peso : Float, genero: String) : Int{
-        val consumo: Int
-        val conversionOnza = 29.5735
-        consumo = when (genero) {
-            "Femenino" -> ((peso / 2) * conversionOnza).toInt()
-            else -> (500+(peso / 2) * conversionOnza).toInt()
-        }
-        return consumo
-
-    }

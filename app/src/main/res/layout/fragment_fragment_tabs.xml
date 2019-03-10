@@ -6,17 +6,65 @@
              tools:context=".Fragments.FragmentTabs"
               android:orientation="vertical">
     <TextView
+            android:text="@string/mtaza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvMBotella"
+            android:textSize="18sp"
+            app:fontFamily="@font/roboto" android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvBotella" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/fabBotella2" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toEndOf="@+id/fabBotella1" android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp" app:layout_constraintHorizontal_bias="0.727"/>
+    <TextView
+            android:text="@string/mtaza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvMTaza"
+            android:textSize="18sp"
+            app:fontFamily="@font/roboto" android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTaza" app:layout_constraintStart_toEndOf="@+id/fabTaza1"
+            android:layout_marginStart="8dp" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/fabTaza2" android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.818"/>
+    <TextView
+            android:text="@string/mvaso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvMVaso"
+            android:textSize="18sp"
+            app:fontFamily="@font/roboto" android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvVaso" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/fabVaso2" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toEndOf="@+id/fabVaso1" android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp" app:layout_constraintHorizontal_bias="0.642"/>
+    <TextView
+            android:text="@string/ml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvMl"
+            android:textSize="24sp"
+            app:fontFamily="@font/roboto" android:textStyle="bold"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toEndOf="@+id/tvConsumoEsperado" android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp" android:layout_marginTop="48dp" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"/>
+    <TextView
             android:text="@string/botella"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvBotella"
             android:textSize="24sp"
             app:fontFamily="@font/roboto" android:textStyle="bold"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="104dp"
             app:layout_constraintTop_toBottomOf="@+id/tvTaza" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/fabBotella2" android:layout_marginRight="8dp"
             app:layout_constraintStart_toEndOf="@+id/fabBotella1" android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginLeft="8dp" app:layout_constraintHorizontal_bias="0.666"/>
     <TextView
             android:text="@string/taza"
             android:layout_width="wrap_content"
@@ -27,7 +75,7 @@
             app:layout_constraintStart_toEndOf="@+id/fabTaza1" android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/fabTaza2" android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.615" android:layout_marginTop="116dp"
+            app:layout_constraintHorizontal_bias="0.769" android:layout_marginTop="104dp"
             app:layout_constraintTop_toBottomOf="@+id/tvVaso"/>
     <TextView
             android:text="@string/vaso"

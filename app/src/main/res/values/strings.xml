@@ -53,6 +53,11 @@
     <string name="vaso">Vaso</string>
     <string name="taza">Taza</string>
     <string name="botella">Botella</string>
+    <string name="ml">ml</string>
+    <string name="mvaso">100 ml</string>
+    <string name="mtaza">100 ml</string>
+    <string name="mbotella">100 ml</string>
+
 
 
 
