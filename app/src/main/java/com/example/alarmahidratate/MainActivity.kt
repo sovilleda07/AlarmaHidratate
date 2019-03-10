@@ -29,8 +29,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         val objetoIntent : Intent = intent
-        val elNombre = objetoIntent.getStringExtra("Nombre")
-        tvNombreM.text = elNombre
+        val elNombre = objetoIntent.getIntExtra("Consumo",0)
+        tvNombreM.text = elNombre.toString()
+
+/*        val bundle : Bundle
+        bundle.putInt("Consumo",elNombre)*/
+
 
 
 //        fab.setOnClickListener { view ->

@@ -22,30 +22,44 @@ class DatosGenerales : AppCompatActivity() {
     }
 
 //  Funcion para validar el ingreso de todos lo datos
-    fun validarCampos(){
+private fun validarCampos(){
         val genero : String
         if (etNombre.text.toString().isEmpty() || etPeso.text.toString().isEmpty() || !(rbFemenino.isChecked || rbMasculino.isChecked)) {
             Toast.makeText(this,"Ingrese todos los datos",Toast.LENGTH_LONG).show()
         }else{
 
-//           Esto es para que muestre un mensaje según el radioButton seleccionado
-            if (rbFemenino.isChecked()) {
-                genero = "Femenino"
-//                Toast.makeText(this,"Femenino",Toast.LENGTH_LONG).show()
-            }else{
-//                Toast.makeText(this,"Masculino",Toast.LENGTH_LONG).show()
-                genero = "Masculino"
+            genero = when {
+                rbFemenino.isChecked -> "Femenino"
+                else -> "Masculino"
             }
 
             val nombre : String = etNombre.text.toString()
-            val peso : Float = etPeso.text.toString().toFloat()
+            val peso = etPeso.text.toString()
+
+            // Llamamos a la función para calcular el consumo de Agua esperado
+            val agua = consumoAgua(peso.toFloat(),genero)
+
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Nombre",nombre)
             intent.putExtra("Peso", peso)
             intent.putExtra("Genero", genero)
+            intent.putExtra("Consumo", agua)
 
             startActivity(intent)
             finish()
         }
     }
 }
+
+
+    // Función para calular el consumo de agua ideal
+fun consumoAgua(peso : Float, genero: String) : Int{
+        val consumo: Int
+        val conversionOnza = 29.5735
+        consumo = when (genero) {
+            "Femenino" -> ((peso / 2) * conversionOnza).toInt()
+            else -> (500+(peso / 2) * conversionOnza).toInt()
+        }
+        return consumo
+
+    }
