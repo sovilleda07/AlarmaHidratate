@@ -28,9 +28,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-       /* val objetoIntent : Intent = intent
+        val objetoIntent : Intent = intent
         val elNombre = objetoIntent.getStringExtra("Nombre")
-        tvNombreMain.text = elNombre*/
+        tvNombreM.text = elNombre
+
 
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

@@ -46,6 +46,18 @@
     <string name="ingresePeso">Ingrese su Peso</string>
     <string name="aceptar">Aceptar</string>
 
+    <!--Texto para Fragment de ingresar consumo-->
+    <string name="pleca">/</string>
+    <string name="ingresado">0</string>
+    <string name="esperado">0</string>
+    <string name="vaso">Vaso</string>
+    <string name="taza">Taza</string>
+    <string name="botella">Botella</string>
+
+
+
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
