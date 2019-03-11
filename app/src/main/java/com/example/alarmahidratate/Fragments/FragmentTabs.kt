@@ -8,9 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import com.example.alarmahidratate.Contenedor
 import com.example.alarmahidratate.Datos
 
 import com.example.alarmahidratate.R
+import kotlinx.android.synthetic.main.fragment_fragment_tabs.view.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -26,7 +29,6 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class FragmentTabs : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
@@ -34,6 +36,11 @@ class FragmentTabs : Fragment() {
     // Inicialización de variables que manejarán el layout
     var tvConsumoEsperado: TextView? = null
     var tvNombreMain: TextView? = null
+    var tvMVaso: TextView? = null
+    var tvMTaza: TextView? = null
+    var tvMBotella: TextView? = null
+    var tvConsumoIngresado : TextView? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +57,14 @@ class FragmentTabs : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        // Creamos una variable para que almacene el View y luego retornarla
         val v = inflater.inflate(R.layout.fragment_fragment_tabs, container, false)
+
+        // Instanciamos los contenedores
+        val vaso = Contenedor("Vaso",100)
+        val taza = Contenedor("Taza", 150)
+        val botella = Contenedor("Botella",250)
 
         // Variable que obtendrá el valor de consumo esperado por medio de una
         // función estática en la clase Datos.
@@ -59,26 +73,87 @@ class FragmentTabs : Fragment() {
         // Mapear las variables a las vistas del layout
         tvConsumoEsperado = v.findViewById(R.id.tvConsumoEsperado)
         tvNombreMain = v.findViewById(R.id.tvNombreMain)
+        tvMVaso = v.findViewById(R.id.tvMVaso)
+        tvMTaza = v.findViewById(R.id.tvMTaza)
+        tvMBotella = v.findViewById(R.id.tvMBotella)
+        tvConsumoIngresado = v.findViewById(R.id.tvConsumoIngresado)
 
-        // Asignar los valores de la clase Datos
+
+        // Asignar los valores de la clase DatosGenerales
         tvConsumoEsperado?.text = agua.toString()
         tvNombreMain?.text = Datos.nombre
+        // Asignar los valores del tamaño de la clase Contenedor
+        tvMVaso?.text = vaso.tamano.toString() + " ml"
+        tvMTaza?.text = taza.tamano.toString() + " ml"
+        tvMBotella?.text = botella.tamano.toString() + " ml"
+
+        // Función que hace el cambio del consumo de agua
+        fun calculos(operacion: String, cambio : Int) {
+            val consumoActual = Datos.aguaConsumida
+            if (operacion == "suma"){
+                Datos.aguaConsumida =  consumoActual + cambio
+                tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
+            }else if(operacion == "resta"){
+                when {
+                    consumoActual == 0 -> Toast.makeText(activity,"No válido",Toast.LENGTH_SHORT).show()
+                    consumoActual < cambio -> {
+                        Datos.aguaConsumida = 0
+                        tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
+                    }
+                    else -> {
+                        Datos.aguaConsumida =  consumoActual - cambio
+                        tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
+
+                    }
+                }
+            }
+        }
+
+
+
+        // Detectar al presionar los Floating Action Button
+        // Llamamos a la función Calculos enviando el tipo de operación
+        // a realizar y el tamaño del contendor
+        v.fabVaso1.setOnClickListener{ view ->
+            calculos("resta",vaso.tamano)
+        }
+        v.fabVaso2.setOnClickListener{ view ->
+            calculos("suma",vaso.tamano)
+
+        }
+        v.fabTaza1.setOnClickListener{ view ->
+            calculos("resta",taza.tamano)
+
+        }
+        v.fabTaza2.setOnClickListener{ view ->
+            calculos("suma",taza.tamano)
+
+        }
+        v.fabBotella1.setOnClickListener{ view ->
+            calculos("resta",botella.tamano)
+
+        }
+        v.fabBotella2.setOnClickListener{ view ->
+            calculos("suma",botella.tamano)
+       }
 
         // Retornamos la vista para inflarla
         return  v
 
     }
 
-    fun onButtonPressed(uri: Uri) {
+
+
+    /*fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
-    }
+    }*/
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener") as Throwable
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
     }
 
@@ -99,7 +174,7 @@ class FragmentTabs : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+
         fun onFragmentInteraction(uri: Uri)
     }
 

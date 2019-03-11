@@ -8,6 +8,7 @@ class Datos() {
         var nombre : String = ""
         var genero : String = ""
         var peso : Double = 0.0
+        var aguaConsumida : Int = 0
 
         // función estática para calcular el consumo esperado de agua
         fun consumoAgua(peso: Double, genero: String): Int {

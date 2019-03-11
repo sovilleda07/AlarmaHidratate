@@ -1,5 +1,8 @@
 package com.example.alarmahidratate
 
-class Contenedor(val nombre: String, val tamano: String, val imagen: Int){
+// Clase para obtener los datos de los contenedores
+class Contenedor(nombre: String, tamano: Int){
+    var nombre:String = nombre
+    var tamano: Int = tamano
 }
 
