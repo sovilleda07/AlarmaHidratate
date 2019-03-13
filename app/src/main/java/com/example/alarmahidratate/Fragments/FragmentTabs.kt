@@ -52,6 +52,7 @@ class FragmentTabs : Fragment() {
 
     }
 
+    // Para inflar el fragment en el MainActivity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -107,9 +108,9 @@ class FragmentTabs : Fragment() {
                     }
                 }
             }
+
+
         }
-
-
 
         // Detectar al presionar los Floating Action Button
         // Llamamos a la función Calculos enviando el tipo de operación
@@ -142,9 +143,16 @@ class FragmentTabs : Fragment() {
 
     }
 
+    // Sobreescribimos esta parte del ciclo de vida, para poder traer
+    // el valor del agua consumida de la clase Datos
+    override fun onResume() {
+        super.onResume()
+        tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
+    }
 
 
-    /*fun onButtonPressed(uri: Uri) {
+
+/*    fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }*/
 
@@ -187,7 +195,6 @@ class FragmentTabs : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment FragmentTabs.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FragmentTabs().apply {

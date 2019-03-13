@@ -43,7 +43,7 @@
     <string name="femenino">Femenino</string>
     <string name="masculino">Masculino</string>
     <string name="peso">Peso</string>
-    <string name="ingresePeso">Ingrese su Peso</string>
+    <string name="ingresePeso">Ingrese su Peso en lb</string>
     <string name="aceptar">Aceptar</string>
 
     <!--Texto para Fragment de ingresar consumo-->

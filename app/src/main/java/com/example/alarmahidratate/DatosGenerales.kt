@@ -13,6 +13,7 @@ class DatosGenerales : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datos_generales)
 
+        // Cuando se le da click al botón aceptar al ingresar los datos
         bAceptar.setOnClickListener{
 
             // Llamamos a la función para validar el ingreso de los campos

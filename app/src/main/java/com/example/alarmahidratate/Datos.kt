@@ -1,7 +1,7 @@
 package com.example.alarmahidratate
 
 // Clase para obtener los datos generales del usuario
-class Datos() {
+class Datos {
     companion object {
 
         // variables estáticas

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.Toast
 
 import com.example.alarmahidratate.R
@@ -45,12 +46,14 @@ class FragmentInformacion : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_informacion, container, false)
+        val v = inflater.inflate(R.layout.fragment_fragment_informacion, container, false)
 
-        /*
-        val  ratingValue = ratingBar.rating
-        Toast.makeText(activity," Calificación: $ratingValue", Toast.LENGTH_SHORT).show()*/
+        val ratingbar = v.findViewById<RatingBar>(R.id.ratingBar)
+        ratingbar.setOnClickListener { view ->
+            Toast.makeText(activity,ratingbar.rating.toString(),Toast.LENGTH_SHORT).show()
+        }
 
+        return v
     }
 
     // TODO: Rename method, update argument and hook method into UI event
