@@ -58,6 +58,16 @@
     <string name="mtaza">100 ml</string>
     <string name="mbotella">100 ml</string>
 
+    <!--Texto para pantalla de Configuración-->
+    <string name="general">General</string>
+    <string name="sexo">Genero</string>
+    <string name="libras">100 lb</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="Frecuencia">Frecuencia</string>
+    <string name="m15">15 minutos</string>
+    <string name="m30">30 minutos</string>
+
+
 
 
 

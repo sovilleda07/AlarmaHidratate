@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.example.alarmahidratate.R
+import kotlinx.android.synthetic.main.fragment_fragment_contenedores.*
+import kotlinx.android.synthetic.main.fragment_fragment_contenedores.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +46,21 @@ class FragmentContenedores : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_contenedores, container, false)
+
+        val v =inflater.inflate(R.layout.fragment_fragment_contenedores, container, false)
+
+        v.bCambiarVaso.setOnClickListener{
+            Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
+        }
+        v.bCambiarTaza.setOnClickListener{ view ->
+            Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
+        }
+        v.bCambiarBotella.setOnClickListener{view ->
+            Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
+        }
+
+
+        return v
 
 
     }
