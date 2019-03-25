@@ -30,7 +30,7 @@ class DatosGenerales : AppCompatActivity() {
         var genero = ""
 
         //Validar campos llenos
-        if (etNombre.text.toString().isEmpty() || etPeso.text.toString().isEmpty() || !(rbFemenino.isChecked || rbMasculino.isChecked)) {
+        if (etUsuario.text.toString().isEmpty() || etContrasena.text.toString().isEmpty() || etNombre.text.toString().isEmpty() || etPeso.text.toString().isEmpty() || !(rbFemenino.isChecked || rbMasculino.isChecked)) {
             Toast.makeText(this,"Ingrese todos los datos",Toast.LENGTH_LONG).show()
         }else{
 

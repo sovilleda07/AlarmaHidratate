@@ -14,8 +14,17 @@
     <string name="ingresar">Ingresar</string>
     <string name="registrarse">Registrarse</string>
 
-    <!-- Textos de Crear Cuenta-->
+    <!--Texto para Datos Generales-->
     <string name="crear">Crear cuenta</string>
+    <string name="ingrese">¡BIENVENIDO!</string>
+    <string name="nombre">Nombre</string>
+    <string name="genero">Genero</string>
+    <string name="femenino">Femenino</string>
+    <string name="masculino">Masculino</string>
+    <string name="peso">Peso</string>
+    <string name="ingresePeso">Peso en lb</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="icono">icono</string>
 
     <!-- Textos de Menu -->
     <string name="nav_inicio">Inicio</string>
@@ -44,17 +53,6 @@
     <string name="contenedor">Vaso</string>
     <string name="medida">150 ml</string>
     <string name="cambiar">Modificar</string>
-
-    <!--Texto para Datos Generales-->
-    <string name="ingrese">¡BIENVENIDO!</string>
-    <string name="nombre">Nombre</string>
-    <string name="ingreseNombre">Ingrese su Nombre</string>
-    <string name="genero">Genero</string>
-    <string name="femenino">Femenino</string>
-    <string name="masculino">Masculino</string>
-    <string name="peso">Peso</string>
-    <string name="ingresePeso">Ingrese su Peso en lb</string>
-    <string name="aceptar">Aceptar</string>
 
     <!--Texto para Fragment de ingresar consumo-->
     <string name="pleca">/</string>
