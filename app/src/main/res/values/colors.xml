@@ -11,4 +11,5 @@
     <color name="colorPText">#C8C8C8</color>
     <color name="colorSText">#FFFFFF</color>
     <color name="colorDivider">#7B7B7B</color>
+    <color name="colorTitulos">#002060</color>
 </resources>

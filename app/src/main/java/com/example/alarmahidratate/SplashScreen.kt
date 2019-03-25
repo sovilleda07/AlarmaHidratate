@@ -14,7 +14,7 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         // Hacemos la transición de una activity a otra
-        val intent = Intent(this@SplashScreen, DatosGenerales::class.java)
+        val intent = Intent(this@SplashScreen, Login::class.java)
         startActivity(intent)
         finish()
 

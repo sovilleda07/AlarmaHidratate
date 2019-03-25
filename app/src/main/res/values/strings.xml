@@ -1,18 +1,28 @@
 <resources>
-    <string name="app_name">Alarma Hidratate</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="app_name">Alarma Hidrátate</string>
+    <string name="navigation_drawer_open">Abrir navigation drawer</string>
+    <string name="navigation_drawer_close">Cerrar navigation drawer</string>
     <!--<string name="nav_header_title">Android Studio</string>-->
     <!--<string name="nav_header_subtitle">android.studio@android.com</string>-->
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Textos de Login-->
+    <string name="inicio">Inicio de Sesión</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="registrarse">Registrarse</string>
+
+    <!-- Textos de Crear Cuenta-->
+    <string name="crear">Crear cuenta</string>
 
     <!-- Textos de Menu -->
     <string name="nav_inicio">Inicio</string>
     <string name="nav_contenedor">Contenedores</string>
     <string name="nav_configuracion">Configuración</string>
     <string name="nav_informacion">Información</string>
-    <string name="nav_header_titulo">Alarma-Hidrate</string>
+    <string name="nav_header_titulo">Alarma-Hidrátate</string>
     <string name="nav_header_subtitulo">alarmahidratate@app.com</string>
 
     <!-- Textos de prueba -->
@@ -66,12 +76,6 @@
     <string name="Frecuencia">Frecuencia</string>
     <string name="m15">15 minutos</string>
     <string name="m30">30 minutos</string>
-
-
-
-
-
-
 
 
     <!-- TODO: Remove or change this placeholder text -->
