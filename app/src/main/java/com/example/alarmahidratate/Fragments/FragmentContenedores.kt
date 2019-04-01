@@ -1,12 +1,18 @@
 package com.example.alarmahidratate.Fragments
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.NumberPicker
+import android.widget.NumberPicker.OnValueChangeListener
+import android.widget.TextView
 import android.widget.Toast
 
 import com.example.alarmahidratate.R
@@ -33,6 +39,9 @@ class FragmentContenedores : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    var number: TextView? = null
+    var numberPicker: Button? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -50,7 +59,13 @@ class FragmentContenedores : Fragment() {
         val v =inflater.inflate(R.layout.fragment_fragment_contenedores, container, false)
 
         v.bCambiarVaso.setOnClickListener{
-            Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
+            number = v.findViewById(R.id.tvnumero) as TextView
+            numberPicker = v.findViewById(R.id.bCambiarVaso) as Button
+            numberPicker!!.setOnClickListener{
+                numberPickerDialog()
+                //Toast.makeText(activity,"presionado", Toast.LENGTH_SHORT).show()
+            }
+            //Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
         }
         v.bCambiarTaza.setOnClickListener{ view ->
             Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
@@ -58,14 +73,39 @@ class FragmentContenedores : Fragment() {
         v.bCambiarBotella.setOnClickListener{view ->
             Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
         }
-
-
         return v
 
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    fun numberPickerDialog(){
+        var myNumberPicker: NumberPicker? = null
+        myNumberPicker!!.maxValue = 10
+        myNumberPicker!!.minValue = 1
+        myNumberPicker.wrapSelectorWheel = true
+
+        var myValChangedListener: OnValueChangeListener? = null
+        myNumberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+            number?.setText(""+newVal)
+        }
+        myNumberPicker.setOnValueChangedListener(myValChangedListener)
+
+        val builder = AlertDialog.Builder(activity).setView(myNumberPicker)
+        builder.setTitle(getString(R.string.cantidad))
+        //builder.setPositiveButton(getString(R.string.modificar),DialogInterface.OnClickListener())
+
+        builder.setPositiveButton(getString(R.string.modificar)) { dialog, which ->
+            Toast.makeText(activity,"Si funciona", Toast.LENGTH_SHORT).show()
+        }
+        builder.setNegativeButton(getString(R.string.cancelar)) { dialog, which ->
+            Toast.makeText(activity,"NO funciona", Toast.LENGTH_SHORT).show()
+        }
+        //val dialog: AlertDialog = builder.create()
+
+        // Mostrar el AlertDialog
+        builder.show()
+    }
+
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }
@@ -96,7 +136,6 @@ class FragmentContenedores : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
@@ -109,7 +148,6 @@ class FragmentContenedores : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment FragmentContenedores.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FragmentContenedores().apply {
@@ -119,4 +157,5 @@ class FragmentContenedores : Fragment() {
                 }
             }
     }
+
 }

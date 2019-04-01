@@ -110,33 +110,23 @@ class FragmentTabs : Fragment() {
             }
 
 
+
         }
 
         // Detectar al presionar los Floating Action Button
         // Llamamos a la función Calculos enviando el tipo de operación
         // a realizar y el tamaño del contendor
-        v.fabVaso1.setOnClickListener{ view ->
-            calculos("resta",vaso.tamano)
-        }
         v.fabVaso2.setOnClickListener{ view ->
             calculos("suma",vaso.tamano)
 
         }
-        v.fabTaza1.setOnClickListener{ view ->
-            calculos("resta",taza.tamano)
-
-        }
-        v.fabTaza2.setOnClickListener{ view ->
+         v.fabTaza2.setOnClickListener{ view ->
             calculos("suma",taza.tamano)
-
-        }
-        v.fabBotella1.setOnClickListener{ view ->
-            calculos("resta",botella.tamano)
 
         }
         v.fabBotella2.setOnClickListener{ view ->
             calculos("suma",botella.tamano)
-       }
+        }
 
         // Retornamos la vista para inflarla
         return  v
@@ -161,7 +151,7 @@ class FragmentTabs : Fragment() {
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnFragmentInteractionListener") as Throwable
         }
     }
 
