@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "62066276140",
+    "firebase_url": "https://alarma-hidratate.firebaseio.com",
+    "project_id": "alarma-hidratate",
+    "storage_bucket": "alarma-hidratate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62066276140:android:6752125d4d1df3f4",
+        "android_client_info": {
+          "package_name": "com.example.alarmahidratate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwzlen455ERqBPEQDI9kILV35C-EolEBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62066276140-4vf54lfmef2cn08rp0nvm7s5mrbv6jhr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

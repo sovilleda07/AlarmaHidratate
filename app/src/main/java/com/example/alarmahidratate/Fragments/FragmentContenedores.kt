@@ -59,13 +59,13 @@ class FragmentContenedores : Fragment() {
         val v =inflater.inflate(R.layout.fragment_fragment_contenedores, container, false)
 
         v.bCambiarVaso.setOnClickListener{
-            number = v.findViewById(R.id.tvnumero) as TextView
+            /*number = v.findViewById(R.id.tvnumero) as TextView
             numberPicker = v.findViewById(R.id.bCambiarVaso) as Button
             numberPicker!!.setOnClickListener{
-                numberPickerDialog()
+               // numberPickerDialog()
                 //Toast.makeText(activity,"presionado", Toast.LENGTH_SHORT).show()
-            }
-            //Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
+            }*/
+            Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
         }
         v.bCambiarTaza.setOnClickListener{ view ->
             Toast.makeText(activity,"Tamaño modificado", Toast.LENGTH_SHORT).show()
@@ -78,7 +78,7 @@ class FragmentContenedores : Fragment() {
 
     }
 
-    fun numberPickerDialog(){
+    /*fun numberPickerDialog(){
         var myNumberPicker: NumberPicker? = null
         myNumberPicker!!.maxValue = 10
         myNumberPicker!!.minValue = 1
@@ -104,7 +104,7 @@ class FragmentContenedores : Fragment() {
 
         // Mostrar el AlertDialog
         builder.show()
-    }
+    }*/
 
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
