@@ -69,7 +69,7 @@ class FragmentTabs : Fragment() {
 
         // Variable que obtendrá el valor de consumo esperado por medio de una
         // función estática en la clase Datos.
-        val agua = Datos.consumoAgua(Datos.peso,Datos.genero)
+       // val agua = Datos.consumoAgua(Datos.peso,Datos.genero)
 
         // Mapear las variables a las vistas del layout
         tvConsumoEsperado = v.findViewById(R.id.tvConsumoEsperado)
@@ -81,15 +81,15 @@ class FragmentTabs : Fragment() {
 
 
         // Asignar los valores de la clase DatosGenerales
-        tvConsumoEsperado?.text = agua.toString()
-        tvNombreMain?.text = Datos.nombre
+        //tvConsumoEsperado?.text = agua.toString()
+        //tvNombreMain?.text = Datos.nombre
         // Asignar los valores del tamaño de la clase Contenedor
         tvMVaso?.text = vaso.tamano.toString() + " ml"
         tvMTaza?.text = taza.tamano.toString() + " ml"
         tvMBotella?.text = botella.tamano.toString() + " ml"
 
         // Función que hace el cambio del consumo de agua
-        fun calculos(operacion: String, cambio : Int) {
+        /*fun calculos(operacion: String, cambio : Int) {
             val consumoActual = Datos.aguaConsumida
             if (operacion == "suma"){
                 Datos.aguaConsumida =  consumoActual + cambio
@@ -111,21 +111,21 @@ class FragmentTabs : Fragment() {
 
 
 
-        }
+        }*/
 
         // Detectar al presionar los Floating Action Button
         // Llamamos a la función Calculos enviando el tipo de operación
         // a realizar y el tamaño del contendor
         v.fabVaso2.setOnClickListener{ view ->
-            calculos("suma",vaso.tamano)
+            //calculos("suma",vaso.tamano)
 
         }
          v.fabTaza2.setOnClickListener{ view ->
-            calculos("suma",taza.tamano)
+           // calculos("suma",taza.tamano)
 
         }
         v.fabBotella2.setOnClickListener{ view ->
-            calculos("suma",botella.tamano)
+           // calculos("suma",botella.tamano)
         }
 
         // Retornamos la vista para inflarla
@@ -137,7 +137,7 @@ class FragmentTabs : Fragment() {
     // el valor del agua consumida de la clase Datos
     override fun onResume() {
         super.onResume()
-        tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
+        //tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
     }
 
 

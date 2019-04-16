@@ -1,15 +1,8 @@
 package com.example.alarmahidratate
 
 // Clase para obtener los datos generales del usuario
-class Datos {
+class Datos(val idUsuario: String, val nombreUsuario: String, val peso: Double, val genero: String) {
     companion object {
-
-        // variables estáticas
-        var nombre : String = ""
-        var genero : String = ""
-        var peso : Double = 0.0
-        var aguaConsumida : Int = 0
-
         // función estática para calcular el consumo esperado de agua
         fun consumoAgua(peso: Double, genero: String): Int {
             val consumo: Int

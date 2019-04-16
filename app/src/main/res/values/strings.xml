@@ -9,7 +9,7 @@
 
     <!-- Textos de Login-->
     <string name="inicio">Inicio de Sesión</string>
-    <string name="usuario">Usuario</string>
+    <string name="correo">Correo electrónico</string>
     <string name="contrasena">Contraseña</string>
     <string name="ingresar">Ingresar</string>
     <string name="registrarse">Registrarse</string>

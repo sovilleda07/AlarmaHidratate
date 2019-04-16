@@ -56,8 +56,8 @@ class FragmentConfiguracion : Fragment() {
         tvlibras = v.findViewById(R.id.tvlibras)
 
         // Asignar los valores de la clase DatosGenerales
-        tvUsuario?.text = Datos.nombre
-        tvlibras?.text = Datos.peso.toString()
+        //tvUsuario?.text = Datos.nombre
+        //tvlibras?.text = Datos.peso.toString()
 
         v.rbF1.setOnClickListener{
             Toast.makeText(activity,"Alarma establecida", Toast.LENGTH_SHORT).show()
