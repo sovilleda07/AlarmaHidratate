@@ -63,9 +63,9 @@ class FragmentTabs : Fragment() {
         val v = inflater.inflate(R.layout.fragment_fragment_tabs, container, false)
 
         // Instanciamos los contenedores
-        val vaso = Contenedor("Vaso",100)
+        /*val vaso = Contenedor("Vaso",100)
         val taza = Contenedor("Taza", 150)
-        val botella = Contenedor("Botella",250)
+        val botella = Contenedor("Botella",250)*/
 
         // Variable que obtendrá el valor de consumo esperado por medio de una
         // función estática en la clase Datos.
@@ -84,9 +84,9 @@ class FragmentTabs : Fragment() {
         //tvConsumoEsperado?.text = agua.toString()
         //tvNombreMain?.text = Datos.nombre
         // Asignar los valores del tamaño de la clase Contenedor
-        tvMVaso?.text = vaso.tamano.toString() + " ml"
+       /* tvMVaso?.text = vaso.tamano.toString() + " ml"
         tvMTaza?.text = taza.tamano.toString() + " ml"
-        tvMBotella?.text = botella.tamano.toString() + " ml"
+        tvMBotella?.text = botella.tamano.toString() + " ml"*/
 
         // Función que hace el cambio del consumo de agua
         /*fun calculos(operacion: String, cambio : Int) {

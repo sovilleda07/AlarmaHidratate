@@ -7,14 +7,17 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <!-- Textos de Login-->
+    <!-- TEXTOS DE LOGIN-->
     <string name="inicio">Inicio de Sesión</string>
     <string name="correo">Correo electrónico</string>
     <string name="contrasena">Contraseña</string>
     <string name="ingresar">Ingresar</string>
     <string name="registrarse">Registrarse</string>
+    <!-- Texto de Toast -->
+    <string name="errorDatos">Ingrese todos los datos</string>
+    <string name="errorInicio">Error al iniciar</string>
 
-    <!--Texto para Datos Generales-->
+    <!--TEXTO PARA REGISTRARSE-->
     <string name="crear">Crear cuenta</string>
     <string name="ingrese">¡BIENVENIDO!</string>
     <string name="nombre">Nombre</string>
@@ -25,8 +28,11 @@
     <string name="ingresePeso">Peso en lb</string>
     <string name="aceptar">Aceptar</string>
     <string name="icono">icono</string>
+    <!-- Texto de Toast-->
+    <string name="errorRegistro">Error al crear la cuenta</string>
+    <string name="cuentaCreada">Su cuenta se ha creado con éxito</string>
 
-    <!-- Textos de Menu -->
+    <!-- TEXTOS DE MENÚ NAVIGATION DRAWER-->
     <string name="nav_inicio">Inicio</string>
     <string name="nav_contenedor">Contenedores</string>
     <string name="nav_historial">Historial</string>
@@ -35,30 +41,16 @@
     <string name="nav_header_titulo">Alarma-Hidrátate</string>
     <string name="nav_header_subtitulo">alarmahidratate@app.com</string>
 
-    <!-- Textos de prueba -->
+    <!-- TEXTOS DE PRUEBA -->
     <string name="text_informacion">Informacion</string>
     <string name="text_configuracion">Configuracion</string>
     <string name="text_contenedores">Contenedores</string>
 
-    <!-- Texto de Splash -->
+    <!-- TEXTO DE SPLASH-->
     <string name="logo">Logo AlarmaHidrátate</string>
 
-    <!--Texto en Fragment Información-->
-    <string name="valoracion">Califícanos</string>
-    <string name="desarrollada">Desarrollada por:</string>
-    <string name="soda">Sonia Villeda</string>
-    <string name="clase">Inteligencia Artificial</string>
-    <string name="periodo">UNICAH IP 2019</string>
 
-    <!--Texto para Fragment Contenedores-->
-    <string name="contenedor">Vaso</string>
-    <string name="medida">150 ml</string>
-    <string name="cambiar">Modificar</string>
-    <string name="cantidad">Elija un tamaño</string>
-    <string name="modificar">Modificar</string>
-    <string name="cancelar">Cancelar</string>
-
-    <!--Texto para Fragment de ingresar consumo-->
+    <!-- TEXTO FRAGMENT CONSUMO/INICIO-->
     <string name="pleca">/</string>
     <string name="ingresado">0</string>
     <string name="esperado">0</string>
@@ -66,13 +58,21 @@
     <string name="taza">Taza</string>
     <string name="botella">Botella</string>
     <string name="ml">ml</string>
-    <string name="mvaso">100 ml</string>
-    <string name="mtaza">100 ml</string>
-    <string name="mbotella">100 ml</string>
+    <string name="mvaso">0 ml</string>
+    <string name="mtaza">0 ml</string>
+    <string name="mbotella">0 ml</string>
 
-    <!-- Texto para Historial-->
+    <!-- TEXTO FRAGMENT CONTENEDORES-->
+    <string name="contenedor">Vaso</string>
+    <string name="medida">150 ml</string>
+    <string name="cambiar">Modificar</string>
+    <string name="cantidad">Elija un tamaño</string>
+    <string name="modificar">Modificar</string>
+    <string name="cancelar">Cancelar</string>
 
-    <!--Texto para pantalla de Configuración-->
+    <!-- TEXTO FRAGMENT HISTORIAL-->
+
+    <!-- TEXTO FRAGMENT CONFIGURACIÓN-->
     <string name="general">General</string>
     <string name="sexo">Genero</string>
     <string name="libras">100 lb</string>
@@ -80,6 +80,13 @@
     <string name="Frecuencia">Frecuencia</string>
     <string name="m15">15 minutos</string>
     <string name="m30">30 minutos</string>
+
+    <!-- TEXTO FRAGMENT INFORMACIÓN-->
+    <string name="valoracion">Califícanos</string>
+    <string name="desarrollada">Desarrollada por:</string>
+    <string name="soda">Sonia Villeda</string>
+    <string name="clase">Inteligencia Artificial</string>
+    <string name="periodo">UNICAH IP 2019</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
