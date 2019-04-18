@@ -61,6 +61,8 @@
     <string name="mvaso">0 ml</string>
     <string name="mtaza">0 ml</string>
     <string name="mbotella">0 ml</string>
+    <!-- Texto de errores -->
+    <string name="errorcarga">Error al cargar datos</string>
 
     <!-- TEXTO FRAGMENT CONTENEDORES-->
     <string name="contenedor">Vaso</string>

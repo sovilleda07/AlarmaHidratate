@@ -1,5 +1,6 @@
 package com.example.alarmahidratate.Fragments
 
+import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -11,8 +12,13 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.alarmahidratate.Contenedor
 import com.example.alarmahidratate.Datos
+import com.example.alarmahidratate.DatosGenerales
 
 import com.example.alarmahidratate.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_fragment_tabs.view.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,15 +68,6 @@ class FragmentTabs : Fragment() {
         // Creamos una variable para que almacene el View y luego retornarla
         val v = inflater.inflate(R.layout.fragment_fragment_tabs, container, false)
 
-        // Instanciamos los contenedores
-        /*val vaso = Contenedor("Vaso",100)
-        val taza = Contenedor("Taza", 150)
-        val botella = Contenedor("Botella",250)*/
-
-        // Variable que obtendrá el valor de consumo esperado por medio de una
-        // función estática en la clase Datos.
-       // val agua = Datos.consumoAgua(Datos.peso,Datos.genero)
-
         // Mapear las variables a las vistas del layout
         tvConsumoEsperado = v.findViewById(R.id.tvConsumoEsperado)
         tvNombreMain = v.findViewById(R.id.tvNombreMain)
@@ -79,9 +76,12 @@ class FragmentTabs : Fragment() {
         tvMBotella = v.findViewById(R.id.tvMBotella)
         tvConsumoIngresado = v.findViewById(R.id.tvConsumoIngresado)
 
+        // Llamamos las funciones para cargar los datos en el layout
+        cargarDatos()
+        cargarContenedores()
+
 
         // Asignar los valores de la clase DatosGenerales
-        //tvConsumoEsperado?.text = agua.toString()
         //tvNombreMain?.text = Datos.nombre
         // Asignar los valores del tamaño de la clase Contenedor
        /* tvMVaso?.text = vaso.tamano.toString() + " ml"
@@ -138,6 +138,63 @@ class FragmentTabs : Fragment() {
     override fun onResume() {
         super.onResume()
         //tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
+    }
+
+    // Función para cargar los datos del usuario
+    private fun cargarDatos(){
+        // Hacemos referencia al nodo que contiene los usuarios especificando el usuario actual por medio del id de este
+        val ref = FirebaseDatabase.getInstance().getReference("/usuarios/${Datos.idUsuarioFB}")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                // creamos una variable de tipo Datos para traer toda la información del Nodo
+                val usuario = p0.getValue(Datos::class.java)
+                // si la información de firebase no es nula, nos llenará los TextView con los correspondientes
+                if(usuario != null){
+                    tvNombreMain?.text = usuario.nombreUsuario
+                    tvConsumoEsperado?.text = usuario.consumoEsperado.toString()
+                    tvConsumoIngresado?.text = usuario.consumoIngresado.toString()
+
+                }
+            }
+            // Mensaje por si no se cargan los datos
+            override fun onCancelled(p0: DatabaseError) {
+                Toast.makeText(activity,getString(R.string.errorcarga),Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun cargarContenedores(){
+        // Hacemos referencia al nodo que contiene los contenedores filtrandolos por el campo del idUsuario con el id del usuario actual
+        val ref = FirebaseDatabase.getInstance().getReference("contenedores").orderByChild("idUsuario").equalTo(Datos.idUsuarioFB)
+        ref.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                // Como son 3 tipos de contenedores, creamos una lista mutable
+                // para poder agregar los objetos de tipo Contenedor
+                val contenedoresUsuario: MutableList<Contenedor> = mutableListOf()
+                // Variable para almacenar la posición del objeto
+                val cont=0
+                // Realizamos un ciclo for para poder recorrer todos los subnodos o nodos hijos
+                // que dieron como resultado según la referencia hecha al inicio (filtrado)
+                for (datasnapshot in p0.children){
+                    // En la siguiente varible almacenaremos el objeto de tipo Contenedor que
+                    // trae todos los datos de Firebase y despues se agregan en la Lista Mutabble
+                    val usuario = datasnapshot.getValue(Contenedor::class.java)
+                    if (usuario != null) {
+                        contenedoresUsuario.add(cont,usuario)
+                    }
+                }
+                // si la información de firebase no es nula, nos llenará los TextView con los correspondientes
+                tvMVaso?.text = contenedoresUsuario[2].tamano.toString()
+                tvMTaza?.text = contenedoresUsuario[1].tamano.toString()
+                tvMBotella?.text = contenedoresUsuario[0].tamano.toString()
+
+            }
+            // Mensaje por si no se cargan los datos
+            override fun onCancelled(p0: DatabaseError) {
+                Toast.makeText(activity,getString(R.string.errorcarga),Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
 
 
