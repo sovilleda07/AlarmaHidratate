@@ -3,7 +3,6 @@ package com.example.alarmahidratate
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -146,7 +145,18 @@ class DatosGenerales : AppCompatActivity() {
                 .addOnFailureListener {
                     Toast.makeText(this, "Error al guardar contenedor", Toast.LENGTH_SHORT).show()
                 }
+
         }
+       /* for ((indice, item) in contenedoresUsuario.withIndex()){
+            referenciaBDContenedor.child("${contenedoresUsuario[indice].nombre}-${idUsuario}").setValue(item)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Se ha guardado el contenedor", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Error al guardar contenedor", Toast.LENGTH_SHORT).show()
+                }
+        }*/
+
     }
 
 }
