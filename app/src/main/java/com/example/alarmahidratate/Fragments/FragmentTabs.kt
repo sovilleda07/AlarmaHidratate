@@ -1,8 +1,9 @@
 package com.example.alarmahidratate.Fragments
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.alarmahidratate.Contenedor
 import com.example.alarmahidratate.Datos
-import com.example.alarmahidratate.DatosGenerales
+import com.example.alarmahidratate.Historial
 
 import com.example.alarmahidratate.R
 import com.google.firebase.database.DataSnapshot
@@ -20,6 +21,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_fragment_tabs.view.*
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -46,7 +51,11 @@ class FragmentTabs : Fragment() {
     var tvMTaza: TextView? = null
     var tvMBotella: TextView? = null
     var tvConsumoIngresado : TextView? = null
+    var tvVaso: TextView? = null
+    var tvTaza: TextView? = null
+    var tvBotella: TextView? = null
 
+    private var consumoIngresadoUsuario : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,56 +85,46 @@ class FragmentTabs : Fragment() {
         tvMBotella = v.findViewById(R.id.tvMBotella)
         tvConsumoIngresado = v.findViewById(R.id.tvConsumoIngresado)
 
+        tvVaso = v.findViewById(R.id.tvVaso)
+        tvTaza = v.findViewById(R.id.tvTaza)
+        tvBotella = v.findViewById(R.id.tvBotella)
+
         // Llamamos las funciones para cargar los datos en el layout
         cargarDatos()
         cargarContenedores()
 
-
-        // Asignar los valores de la clase DatosGenerales
-        //tvNombreMain?.text = Datos.nombre
-        // Asignar los valores del tamaño de la clase Contenedor
-       /* tvMVaso?.text = vaso.tamano.toString() + " ml"
-        tvMTaza?.text = taza.tamano.toString() + " ml"
-        tvMBotella?.text = botella.tamano.toString() + " ml"*/
-
-        // Función que hace el cambio del consumo de agua
-        /*fun calculos(operacion: String, cambio : Int) {
-            val consumoActual = Datos.aguaConsumida
-            if (operacion == "suma"){
-                Datos.aguaConsumida =  consumoActual + cambio
-                tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
-            }else if(operacion == "resta"){
-                when {
-                    consumoActual == 0 -> Toast.makeText(activity,"No válido",Toast.LENGTH_SHORT).show()
-                    consumoActual < cambio -> {
-                        Datos.aguaConsumida = 0
-                        tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
-                    }
-                    else -> {
-                        Datos.aguaConsumida =  consumoActual - cambio
-                        tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
-
-                    }
-                }
-            }
-
-
-
-        }*/
-
         // Detectar al presionar los Floating Action Button
-        // Llamamos a la función Calculos enviando el tipo de operación
-        // a realizar y el tamaño del contendor
-        v.fabVaso2.setOnClickListener{ view ->
-            //calculos("suma",vaso.tamano)
+        // Dependiendo del FAB presionado se actualizará el consumo ingresado
+        // con el valor del contenedor
 
+        var tamanoConsumo: Int
+        var nombreContenedor: String
+        v.fabVaso.setOnClickListener{
+            val laFecha = getDate()
+            val laHora = getTime()
+            tamanoConsumo = tvMVaso?.text.toString().toInt()
+            nombreContenedor = tvVaso?.text.toString()
+            consumoIngresadoUsuario = Datos.consumoUsuario + tamanoConsumo
+            registrarConsumo(nombreContenedor, tamanoConsumo,laFecha, laHora)
+            actualizarConsumo(consumoIngresadoUsuario)
         }
-         v.fabTaza2.setOnClickListener{ view ->
-           // calculos("suma",taza.tamano)
-
-        }
-        v.fabBotella2.setOnClickListener{ view ->
-           // calculos("suma",botella.tamano)
+         v.fabTaza.setOnClickListener{
+             val laFecha = getDate()
+             val laHora = getTime()
+             tamanoConsumo = tvMTaza?.text.toString().toInt()
+             nombreContenedor = tvTaza?.text.toString()
+             consumoIngresadoUsuario = Datos.consumoUsuario + tamanoConsumo
+             registrarConsumo(nombreContenedor, tamanoConsumo,laFecha, laHora)
+             actualizarConsumo(consumoIngresadoUsuario)
+         }
+        v.fabBotella.setOnClickListener{
+            val laFecha = getDate()
+            val laHora = getTime()
+            tamanoConsumo = tvMBotella?.text.toString().toInt()
+            nombreContenedor = tvBotella?.text.toString()
+            consumoIngresadoUsuario = Datos.consumoUsuario + tamanoConsumo
+            registrarConsumo(nombreContenedor, tamanoConsumo,laFecha, laHora)
+            actualizarConsumo(consumoIngresadoUsuario)
         }
 
         // Retornamos la vista para inflarla
@@ -137,7 +136,8 @@ class FragmentTabs : Fragment() {
     // el valor del agua consumida de la clase Datos
     override fun onResume() {
         super.onResume()
-        //tvConsumoIngresado?.text = Datos.aguaConsumida.toString()
+        cargarDatos()
+        cargarContenedores()
     }
 
     // Función para cargar los datos del usuario
@@ -153,7 +153,7 @@ class FragmentTabs : Fragment() {
                     tvNombreMain?.text = usuario.nombreUsuario
                     tvConsumoEsperado?.text = usuario.consumoEsperado.toString()
                     tvConsumoIngresado?.text = usuario.consumoIngresado.toString()
-
+                    Datos.consumoUsuario = usuario.consumoIngresado
                 }
             }
             // Mensaje por si no se cargan los datos
@@ -163,6 +163,7 @@ class FragmentTabs : Fragment() {
         })
     }
 
+    // Función para cargar los tamaños de los contenedores según el usuario actual
     private fun cargarContenedores(){
         // Hacemos referencia al nodo que contiene los contenedores filtrandolos por el campo del idUsuario con el id del usuario actual
         val ref = FirebaseDatabase.getInstance().getReference("contenedores").orderByChild("idUsuario").equalTo(Datos.idUsuarioFB)
@@ -197,6 +198,74 @@ class FragmentTabs : Fragment() {
 
     }
 
+    // Función para tomar la hora actual del celular
+    @SuppressLint("SimpleDateFormat")
+    private fun getDate(): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val current = LocalDateTime.now()
+            val locale = Locale(getString(R.string.localeLanguage), getString(R.string.localeCountry))
+            val formatter = DateTimeFormatter.ofPattern("hh:mm a", locale)
+            val answer: String = current.format(formatter)
+            answer
+        } else {
+            val fecha = Date()
+            val formatter = SimpleDateFormat("hh:mm:ss a")
+            return formatter.format(fecha)
+        }
+    }
+
+    // Función para tomar la fecha actual del celular
+    @SuppressLint("SimpleDateFormat")
+    private fun getTime(): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val current = LocalDateTime.now()
+            val locale = Locale(getString(R.string.localeLanguage), getString(R.string.localeCountry))
+            val formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy", locale)
+            val answer: String = current.format(formatter)
+            answer
+        } else {
+            val fecha = Date()
+            val formatter = SimpleDateFormat("dd LLLL yyyy")
+            return formatter.format(fecha)
+        }
+    }
+
+    // Función para registrar en el Historial el consumo de agua
+    // y Actualizar el ConsumoIngresado de Agua
+    private fun registrarConsumo(nombre: String,tamano: Int, fecha : String, hora: String){
+        // Creamos la referencia al nodo de Contenedores de nuestra BD
+        val referenciaBDHistorial = FirebaseDatabase.getInstance().getReference("/historial/${Datos.idUsuarioFB}")
+
+        // Variable de tipo Historial que almacenará toda la información a guardar en la BD
+        val registro = Historial(nombre,tamano,fecha, hora)
+
+        // Insertamos en Firebase
+        referenciaBDHistorial.push().setValue(registro)
+            .addOnSuccessListener {
+                Toast.makeText(activity, "Consumo registrado", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(activity, "Error consumo", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    // Función para actualizar el Consumo Ingresado de agua del usuario
+    private fun actualizarConsumo(consumoActual: Int){
+        // Creamos la referencia al nodo Usuarios de nuestra BD
+        val referenciaUsuario = FirebaseDatabase.getInstance().getReference("usuarios")
+
+        // Insertamos en Firebase
+        referenciaUsuario.child(Datos.idUsuarioFB).child("consumoIngresado").setValue(consumoActual)
+            .addOnSuccessListener {
+                Toast.makeText(activity, "Consumo actualizado", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(activity, "Error consumo ingresado", Toast.LENGTH_SHORT).show()
+            }
+        // Volvemos a cargar los datos del usuario después de realizar la inserción
+        this.cargarDatos()
+
+    }
 
 
 /*    fun onButtonPressed(uri: Uri) {
@@ -208,7 +277,7 @@ class FragmentTabs : Fragment() {
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener") as Throwable
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
     }
 

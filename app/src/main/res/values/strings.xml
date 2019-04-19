@@ -58,9 +58,9 @@
     <string name="taza">Taza</string>
     <string name="botella">Botella</string>
     <string name="ml">ml</string>
-    <string name="mvaso">0 ml</string>
-    <string name="mtaza">0 ml</string>
-    <string name="mbotella">0 ml</string>
+    <string name="mlContenedores">0</string>
+    <string name="localeLanguage">es</string>
+    <string name="localeCountry">hn</string>
     <!-- Texto de errores -->
     <string name="errorcarga">Error al cargar datos</string>
 

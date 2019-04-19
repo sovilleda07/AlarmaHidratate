@@ -6,6 +6,7 @@ class Datos(val idUsuario: String, val nombreUsuario: String, val peso: Double, 
     companion object {
         // varible estática
         var idUsuarioFB : String = ""
+        var consumoUsuario : Int = 0
 
         // función estática para calcular el consumo esperado de agua
         fun consumoAgua(peso: Double, genero: String): Int {
