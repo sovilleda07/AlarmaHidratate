@@ -71,6 +71,7 @@
     <string name="cantidad">Elija un tamaño</string>
     <string name="modificar">Modificar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="cambiarTamaño">Cambiar tamaño</string>
 
     <!-- TEXTO FRAGMENT HISTORIAL-->
 

@@ -34,9 +34,6 @@ class DatosGenerales : AppCompatActivity() {
 
         // Cuando se le da click al botón aceptar al ingresar los datos
         bAceptar.setOnClickListener{
-            // Toast de prueba
-            //Toast.makeText(this,"Se presiono esto",Toast.LENGTH_LONG).show()
-
             // Llamamos a la función que valida los datos e ingresa el usuario
             registrar()
         }
@@ -123,6 +120,7 @@ class DatosGenerales : AppCompatActivity() {
 
     }
 
+    // Función para almacenar los contenedores del usuario recién creado
     private fun guardarContenedores(idUsuario: String) {
         // Creamos la referencia al nodo de Contenedores de nuestra BD
         val referenciaBDContenedor = FirebaseDatabase.getInstance().getReference("contenedores")
@@ -136,18 +134,13 @@ class DatosGenerales : AppCompatActivity() {
         )
 
         // Insertaremos cada uno de los elementos en la lista
-        contenedoresUsuario.forEach {
-            // utilizamos push() para generar un ID único en ese nodo
-            referenciaBDContenedor.push().setValue(it)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Se ha guardado el contenedor", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Error al guardar contenedor", Toast.LENGTH_SHORT).show()
-                }
-
-        }
-       /* for ((indice, item) in contenedoresUsuario.withIndex()){
+        /* Por medio de un ciclo For recorremos nuestra lista de contenedores
+            para poder obtener el nombre de cada uno de ellos, para poder crear un Key
+            personalizado, el cuál se realiza por medio de la función de Firebase .child()
+            donde se establece un patrón, en este caso el Key estará compuesta por
+            el nombre del contenedor - el id del usuario actual
+        * */
+        for ((indice, item) in contenedoresUsuario.withIndex()){
             referenciaBDContenedor.child("${contenedoresUsuario[indice].nombre}-${idUsuario}").setValue(item)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Se ha guardado el contenedor", Toast.LENGTH_SHORT).show()
@@ -155,7 +148,7 @@ class DatosGenerales : AppCompatActivity() {
                 .addOnFailureListener {
                     Toast.makeText(this, "Error al guardar contenedor", Toast.LENGTH_SHORT).show()
                 }
-        }*/
+        }
 
     }
 

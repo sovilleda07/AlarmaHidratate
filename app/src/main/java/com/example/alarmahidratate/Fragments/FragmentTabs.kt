@@ -100,30 +100,48 @@ class FragmentTabs : Fragment() {
         var tamanoConsumo: Int
         var nombreContenedor: String
         v.fabVaso.setOnClickListener{
+            // Tomamos la fecha y hora del celular
             val laFecha = getDate()
             val laHora = getTime()
+            // Tomamos el tamaño del contenedor
             tamanoConsumo = tvMVaso?.text.toString().toInt()
+            // Tomamos el nombre del contenedor
             nombreContenedor = tvVaso?.text.toString()
+            // Realizamos la suma del consumo del usuario + el tamano del contenedor
             consumoIngresadoUsuario = Datos.consumoUsuario + tamanoConsumo
+            // Registramos el consumo en el historial
             registrarConsumo(nombreContenedor, tamanoConsumo,laFecha, laHora)
+            // Actualizamos el consumo ingresado por el usuario
             actualizarConsumo(consumoIngresadoUsuario)
         }
          v.fabTaza.setOnClickListener{
+             // Tomamos la fecha y hora del celular
              val laFecha = getDate()
              val laHora = getTime()
+             // Tomamos el tamaño del contenedor
              tamanoConsumo = tvMTaza?.text.toString().toInt()
+             // Tomamos el nombre del contenedor
              nombreContenedor = tvTaza?.text.toString()
+             // Realizamos la suma del consumo del usuario + el tamano del contenedor
              consumoIngresadoUsuario = Datos.consumoUsuario + tamanoConsumo
+             // Registramos el consumo en el historial
              registrarConsumo(nombreContenedor, tamanoConsumo,laFecha, laHora)
+             // Actualizamos el consumo ingresado por el usuario
              actualizarConsumo(consumoIngresadoUsuario)
          }
         v.fabBotella.setOnClickListener{
+            // Tomamos la fecha y hora del celular
             val laFecha = getDate()
             val laHora = getTime()
+            // Tomamos el tamaño del contenedor
             tamanoConsumo = tvMBotella?.text.toString().toInt()
+            // Tomamos el nombre del contenedor
             nombreContenedor = tvBotella?.text.toString()
+            // Realizamos la suma del consumo del usuario + el tamano del contenedor
             consumoIngresadoUsuario = Datos.consumoUsuario + tamanoConsumo
+            // Registramos el consumo en el historial
             registrarConsumo(nombreContenedor, tamanoConsumo,laFecha, laHora)
+            // Actualizamos el consumo ingresado por el usuario
             actualizarConsumo(consumoIngresadoUsuario)
         }
 
@@ -173,7 +191,7 @@ class FragmentTabs : Fragment() {
                 // para poder agregar los objetos de tipo Contenedor
                 val contenedoresUsuario: MutableList<Contenedor> = mutableListOf()
                 // Variable para almacenar la posición del objeto
-                val cont=0
+                var cont=0
                 // Realizamos un ciclo for para poder recorrer todos los subnodos o nodos hijos
                 // que dieron como resultado según la referencia hecha al inicio (filtrado)
                 for (datasnapshot in p0.children){
@@ -182,6 +200,7 @@ class FragmentTabs : Fragment() {
                     val usuario = datasnapshot.getValue(Contenedor::class.java)
                     if (usuario != null) {
                         contenedoresUsuario.add(cont,usuario)
+                        cont+=1
                     }
                 }
                 // si la información de firebase no es nula, nos llenará los TextView con los correspondientes

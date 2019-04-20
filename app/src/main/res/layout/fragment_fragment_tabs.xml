@@ -12,12 +12,11 @@
             android:id="@+id/tvMl4"
             android:textSize="20sp"
             app:fontFamily="@font/roboto" android:textStyle="bold"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="32dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="24dp"
             app:layout_constraintStart_toEndOf="@+id/tvMBotella"
-            android:layout_marginStart="8dp" android:layout_marginLeft="8dp"
-            app:layout_constraintHorizontal_bias="1.0" android:layout_marginTop="108dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvMl3"/>
+            android:layout_marginStart="8dp" android:layout_marginLeft="8dp" android:layout_marginTop="108dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvMl3" app:layout_constraintHorizontal_bias="0.931"/>
     <TextView
             android:text="@string/ml"
             android:layout_width="wrap_content"
@@ -28,9 +27,8 @@
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="24dp"
             app:layout_constraintStart_toEndOf="@+id/tvMTaza"
-            android:layout_marginStart="8dp" android:layout_marginLeft="8dp"
-            app:layout_constraintHorizontal_bias="0.941" android:layout_marginTop="112dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvMl2"/>
+            android:layout_marginStart="8dp" android:layout_marginLeft="8dp" android:layout_marginTop="112dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvMl2" app:layout_constraintHorizontal_bias="0.947"/>
     <TextView
             android:text="@string/ml"
             android:layout_width="wrap_content"
@@ -73,13 +71,13 @@
             android:textSize="20sp"
             app:fontFamily="@font/roboto" android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/tvVaso"
-            android:layout_marginStart="24dp" android:layout_marginLeft="24dp" android:layout_marginTop="28dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvMl"/>
+            android:layout_marginStart="24dp" android:layout_marginLeft="24dp"
+            android:layout_marginTop="28dp" app:layout_constraintTop_toBottomOf="@+id/tvML3"/>
     <TextView
             android:text="@string/ml"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvMl"
+            android:id="@+id/tvML3"
             android:textSize="24sp"
             app:fontFamily="@font/roboto" android:textStyle="bold"
             android:layout_marginEnd="8dp"
