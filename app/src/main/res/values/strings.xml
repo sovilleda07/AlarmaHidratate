@@ -85,6 +85,12 @@
     <string name="frecuencia">Frecuencia</string>
     <string name="m15">15 minutos</string>
     <string name="m30">30 minutos</string>
+    <!-- Texto para alarma -->
+    <string name="noAlarma">No establecer</string>
+    <string name="quinceMinutos">15 Minutos</string>
+    <string name="treintaMinutos">30 Minutos</string>
+    <string name="unaHora">1 Hora</string>
+
 
     <!-- TEXTO FRAGMENT INFORMACIÓN-->
     <string name="valoracion">Califícanos</string>

@@ -1,8 +1,8 @@
 package com.example.alarmahidratate.Fragments
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,13 +14,13 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import com.example.alarmahidratate.Datos
-
 import com.example.alarmahidratate.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.lang.StringBuilder
+import kotlinx.android.synthetic.main.fragment_fragment_configuracion2.view.*
+
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -65,21 +65,28 @@ class FragmentConfiguracion : Fragment() {
         tvPeso = v.findViewById(R.id.tvPesoUsuario)
         tvGenero = v.findViewById(R.id.tvGeneroUsuario)
 
+        // Cargamos todos los datos del usuario en el layout
         cargarDatos()
 
+        // Actualizar Nombre
         tvNombre.setOnClickListener{
-            Toast.makeText(activity,"Se presionó nombre", Toast.LENGTH_SHORT).show()
             alertDialogNombre()
         }
 
+        // Actualizar Peso
         tvPeso.setOnClickListener {
             alertDialogPeso()
-
         }
 
+        // Actualizar Genero
         tvGenero.setOnClickListener{
-            //alertDialogGenero()
+            alertDialogGenero()
+        }
 
+        // Botón para establecer la Alarma
+        v.btnAlarma.setOnClickListener {
+            // Llamos el Alert Dialog de la frecuencia de la alarma
+            alertDialogAlarma()
         }
 
         return v
@@ -104,7 +111,6 @@ class FragmentConfiguracion : Fragment() {
                     tvNombre.text = usuario.nombreUsuario
                     tvPeso.text = usuario.peso.toString()
                     tvGenero.text = usuario.genero
-
                 }
             }
 
@@ -115,41 +121,49 @@ class FragmentConfiguracion : Fragment() {
         })
     }
 
-    // función para mostrar un AlertDialog para modificar el nombre del usuario
+    // Función para mostrar un AlertDialog para modificar el nombre del usuario
+    @SuppressLint("InflateParams")
     private fun alertDialogNombre(){
         // Creamos un AlertDialog
         val builder = AlertDialog.Builder(activity)
 
-        // Colocamos un título
-        builder.setTitle("Cambiar Nombre")
+        // Colocamos un Título
+        builder.setTitle("Cambiar nombre")
 
-        // Creamos el EditText donde se ingresará el nuevo nombre
-        val textNombre = EditText(activity)
+        // Vamos a inflar el layout
+        val inflater = LayoutInflater.from(activity)
 
-        // Tomamos el valor del nombre actual
-        textNombre.setText(tvNombre.text)
+        // Creamos una vista para poder inflar el layout creado que contendrá las opcciones a actualizar
+        val view = inflater.inflate(R.layout.layout_update_nombre, null)
+
+        // Los valores que tomaremos del layout
+        val editText = view.findViewById<EditText>(R.id.editTextNombre)
+
+        // Tomamos el valor del nombre actual del usuario
+        editText.setText(tvNombre.text.toString())
 
         // Seteamos la vista que contiene el layout
-        builder.setView(textNombre)
+        builder.setView(view)
 
-        // Cuando se presione el botón de Actualizar
+        // Cuando se presione el botón de actualizar
         builder.setPositiveButton("Actualizar") { dialog, which ->
-            val nuevoNombre = textNombre.toString().trim()
+            // Tomamos el valor del editText escrito
+            val nuevoNombre = editText.text.toString().trim()
 
-            // Si el nombre está vacío que muestre un error
+            // Si el nombre está vacío, no permitir
             if (nuevoNombre.isEmpty()){
-                textNombre.error = "Ingrese un nombre"
-                Toast.makeText(activity, "Ingrese un nombre", Toast.LENGTH_SHORT).show()
-                textNombre.requestFocus()
-            }else{
-                // AQUI VA LA FUNCIÓN DE ACTUALIZAR
+                editText.error = "Ingrese un nombre"
+                Toast.makeText(activity, "Ingrese un nombre", Toast.LENGTH_SHORT ).show()
             }
-
+            else{
+                // Llamamos a la función para actualizar al nuevo nombre
+                actualizarDatos(nuevoNombre, "nombreUsuario")
+            }
         }
 
         // Cuando se presione el botón de NO
         builder.setNegativeButton("No") { dialog, which ->
-
+            dialog.cancel()
         }
 
         // Creamos nuestra alerta
@@ -160,6 +174,7 @@ class FragmentConfiguracion : Fragment() {
     }
 
     // Función para mostrar un AlertDialog para modificar el peso del usuario
+    @SuppressLint("InflateParams")
     private fun alertDialogPeso(){
         // Creamos un AlertDialog
         val builder = AlertDialog.Builder(activity)
@@ -185,16 +200,16 @@ class FragmentConfiguracion : Fragment() {
         // Cuando se presione el botón de actualizar
         builder.setPositiveButton("Actualizar") { dialog, which ->
             // Tomamos el valor del editText escrito
-            val nuevoPeso = editText.text.toString().toInt()
+            val nuevoPeso = editText.text.toString().toDouble()
 
             // Si el peso ingresado es 0, no permitir actualizar
-            if (nuevoPeso == 0){
+            if (nuevoPeso == 0.00){
                 editText.error = "Ingrese un valor diferente a cero"
                 Toast.makeText(activity, "Ingrese un valor diferente a cero", Toast.LENGTH_SHORT ).show()
             }
             else{
                 // Llamamos a la función para actualizar al nuevo peso
-                // actualizarDatos()
+                actualizarPeso(nuevoPeso)
             }
 
         }
@@ -212,6 +227,7 @@ class FragmentConfiguracion : Fragment() {
     }
 
     // Función para mostrar un AlertDialog para modificar el genero del usuario
+    @SuppressLint("InflateParams")
     private fun alertDialogGenero(){
         // Creamos un AlertDialog
         val builder = AlertDialog.Builder(activity)
@@ -223,20 +239,20 @@ class FragmentConfiguracion : Fragment() {
         val inflater = LayoutInflater.from(activity)
 
         // Creamos una vista para poder inflar el layout creado que contendrá las ocpciones a actualizar
-        val view = inflater.inflate(R.layout.layout_update_peso, null)
+        val view = inflater.inflate(R.layout.layout_update_genero, null)
 
-        // Los valores que tomaremos del layout
+        // Los valores que tomaremos del layout del Alert Dialog
         val rbF = view.findViewById<RadioButton>(R.id.rbFemenino)
         val rbM = view.findViewById<RadioButton>(R.id.rbMasculino)
 
         // Tomaremos el genero actual
         val genero = tvGenero.text
 
-        // -------------------AQUI ESTÁ EL PROBLEMA
+        // Evaluamos el genero actual
         if (genero == "Femenino"){
-            rbF.isChecked
+            rbF.isChecked = true
         } else if(genero == "Masculino"){
-            rbM.isChecked
+            rbM.isChecked = true
         }
 
         // Seteamos la vista que contiene el layout
@@ -254,9 +270,99 @@ class FragmentConfiguracion : Fragment() {
                 nuevoGenero = "Masculino"
             }
 
-            Toast.makeText(activity,nuevoGenero,Toast.LENGTH_SHORT).show()
+            // Actualizamos nuestro dato
+            actualizarDatos(nuevoGenero,"genero")
 
+        }
 
+        // Cuando se presione el botón de NO
+        builder.setNegativeButton("No") { dialog, which ->
+            dialog.cancel()
+        }
+
+        // Creamos nuestra alerta
+        val alert = builder.create()
+        // Y la mostramos
+        alert.show()
+    }
+
+    // Función para actualizar los datos del usuario
+    private fun actualizarDatos(nuevoDato: String, campoActualizar: String){
+        // Creamos la referencia al nodo Usuarios de nuestra BD
+        val referenciaUsuario = FirebaseDatabase.getInstance().getReference("usuarios")
+
+        // Actualizamos en Firebase
+        referenciaUsuario.child(Datos.idUsuarioFB).child(campoActualizar).setValue(nuevoDato)
+            .addOnSuccessListener {
+                Toast.makeText(activity, "Dato actualizado", Toast.LENGTH_SHORT).show()
+            }
+
+            .addOnFailureListener {
+                Toast.makeText(activity, "Error al actualizar dato", Toast.LENGTH_SHORT).show()
+            }
+        if (campoActualizar == "genero"){
+            actualizarConsumoEsperadoUsuario(tvPeso.text.toString().toDouble(), nuevoDato)
+        }
+    }
+
+    // Función para actualizar el peso del usuario
+    private fun actualizarPeso(nuevoPeso: Double){
+        // Creamos la referencia al nodo Usuario de nuestra BD
+        val referenciaPesoUsuario = FirebaseDatabase.getInstance().getReference("usuarios")
+
+        // Actualizamos en Firebase
+        referenciaPesoUsuario.child(Datos.idUsuarioFB).child("peso").setValue(nuevoPeso)
+            .addOnSuccessListener {
+                Toast.makeText(activity, "Dato actualizado", Toast.LENGTH_SHORT).show()
+            }
+
+            .addOnFailureListener {
+                Toast.makeText(activity, "Error al actualizar dato", Toast.LENGTH_SHORT).show()
+            }
+        actualizarConsumoEsperadoUsuario(nuevoPeso,tvGenero.text.toString())
+
+    }
+
+    // Función para actualizar el consumoEsperado al actualizar los datos del usuario
+    private fun actualizarConsumoEsperadoUsuario(peso: Double, genero: String){
+        val nuevoConsumo = Datos.consumoAgua(peso,genero)
+
+        // Creamos la referencia al nodo Usuario de nuestra BD
+        val refNuevoConsumo = FirebaseDatabase.getInstance().getReference("usuarios")
+
+        // Actualizamos en Firebase
+        refNuevoConsumo.child(Datos.idUsuarioFB).child("consumoEsperado").setValue(nuevoConsumo)
+            .addOnSuccessListener {
+                Toast.makeText(activity, "Consumo Esperado actualizado", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(activity, "Error Consumo", Toast.LENGTH_SHORT).show()
+            }
+
+    }
+
+    // Función para mostrar el Alert Dialog de la frecuencia de la Alarma
+    @SuppressLint("InflateParams")
+    private fun alertDialogAlarma(){
+        // Creamos un AlertDialog
+        val builder = AlertDialog.Builder(activity)
+
+        // Colocamos un título
+        builder.setTitle("Establecer Alarma")
+
+        // Inflamos el layout
+        val inflater = LayoutInflater.from(activity)
+
+        // Creamos una vista para poder inflar el layout creado que contendrá las opciones de frecuencia
+        val view = inflater.inflate(R.layout.layout_alarma, null)
+
+        // Los valores que tomaremos el layout
+
+        // Seteamos la vista que contiene el layout
+        builder.setView(view)
+
+        // Cuando se presione el botón Establecer
+        builder.setPositiveButton("Actualizar") { dialog, which ->
 
         }
 
@@ -271,13 +377,9 @@ class FragmentConfiguracion : Fragment() {
         alert.show()
 
 
-
     }
 
-    // Función para actualizar los datos del usuario
-    private fun actualizarDatos(){
 
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
