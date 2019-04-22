@@ -74,6 +74,10 @@
     <string name="cambiarTamaño">Cambiar tamaño</string>
 
     <!-- TEXTO FRAGMENT HISTORIAL-->
+    <string name="laFecha">Fecha</string>
+    <string name="laHora">Hora</string>
+    <string name="nombreContenedor">Contenedor</string>
+    <string name="consumo">Consumo</string>
 
     <!-- TEXTO FRAGMENT CONFIGURACIÓN-->
     <string name="general">General</string>

@@ -9,15 +9,12 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.example.alarmahidratate.Fragments.FragmentConfiguracion
-import com.example.alarmahidratate.Fragments.FragmentContenedores
-import com.example.alarmahidratate.Fragments.FragmentInformacion
-import com.example.alarmahidratate.Fragments.FragmentTabs
+import com.example.alarmahidratate.Fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 //import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, FragmentConfiguracion.OnFragmentInteractionListener, FragmentContenedores.OnFragmentInteractionListener, FragmentInformacion.OnFragmentInteractionListener, FragmentTabs.OnFragmentInteractionListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, FragmentConfiguracion.OnFragmentInteractionListener, FragmentContenedores.OnFragmentInteractionListener, FragmentInformacion.OnFragmentInteractionListener, FragmentTabs.OnFragmentInteractionListener, FragmentHistorial.OnFragmentInteractionListener {
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -83,6 +80,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_contenedor -> {
                 /*Cargar los fragments en el MainActivity*/
                 supportFragmentManager.beginTransaction().replace(R.id.content_main, FragmentContenedores()).commit()
+            }
+            R.id.nav_historial -> {
+                /*Cargar los fragments en el MainActivity*/
+                supportFragmentManager.beginTransaction().replace(R.id.content_main, FragmentHistorial()).commit()
             }
             R.id.nav_configuration -> {
                 /*Cargar los fragments en el MainActivity*/

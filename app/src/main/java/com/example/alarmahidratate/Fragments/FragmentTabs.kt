@@ -219,7 +219,7 @@ class FragmentTabs : Fragment() {
 
     // Función para tomar la hora actual del celular
     @SuppressLint("SimpleDateFormat")
-    private fun getDate(): String {
+    private fun getTime(): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val current = LocalDateTime.now()
             val locale = Locale(getString(R.string.localeLanguage), getString(R.string.localeCountry))
@@ -235,7 +235,7 @@ class FragmentTabs : Fragment() {
 
     // Función para tomar la fecha actual del celular
     @SuppressLint("SimpleDateFormat")
-    private fun getTime(): String {
+    private fun getDate(): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val current = LocalDateTime.now()
             val locale = Locale(getString(R.string.localeLanguage), getString(R.string.localeCountry))
