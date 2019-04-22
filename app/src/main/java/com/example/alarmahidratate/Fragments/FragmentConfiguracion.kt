@@ -3,8 +3,10 @@ package com.example.alarmahidratate.Fragments
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.AlarmClock
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +22,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_fragment_configuracion2.view.*
+import android.app.AlarmManager
+//import android.R
+import android.app.PendingIntent
+import android.content.Context.ALARM_SERVICE
+import android.os.SystemClock
+import android.support.v4.content.ContextCompat.getSystemService
+import com.example.alarmahidratate.AlarmReceiver
+import java.util.*
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -356,13 +366,42 @@ class FragmentConfiguracion : Fragment() {
         // Creamos una vista para poder inflar el layout creado que contendrá las opciones de frecuencia
         val view = inflater.inflate(R.layout.layout_alarma, null)
 
-        // Los valores que tomaremos el layout
+        // Los valores que tomaremos del layout del Alert Dialog
+        val rbNo = view.findViewById<RadioButton>(R.id.rbNoAlarma)
+        val rbQuince = view.findViewById<RadioButton>(R.id.rbQuince)
+        val rbTreinta = view.findViewById<RadioButton>(R.id.rbTreinta)
+        val rbHora = view.findViewById<RadioButton>(R.id.rbHora)
 
         // Seteamos la vista que contiene el layout
         builder.setView(view)
 
         // Cuando se presione el botón Establecer
         builder.setPositiveButton("Actualizar") { dialog, which ->
+            val intent  = Intent(activity, AlarmReceiver::class.java)
+            val manager = activity?.getSystemService(ALARM_SERVICE) as? AlarmManager
+            val pIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+
+            // Evaluación de la selección de RadioButton
+            if (rbNo.isChecked){
+                manager?.cancel(pIntent)
+                Toast.makeText(context, "No te recordaremos nada.", Toast.LENGTH_SHORT).show()
+            } else if(rbQuince.isChecked){
+                manager?.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,  5000, AlarmManager.INTERVAL_FIFTEEN_MINUTES, pIntent)
+            }
+            else if (rbTreinta.isChecked)
+            {
+                manager?.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,  5000, AlarmManager.INTERVAL_HALF_HOUR,pIntent)
+            }
+            else if (rbHora.isChecked)
+            {
+                manager?.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,  5000, AlarmManager.INTERVAL_HOUR, pIntent)
+            }
+
+
+
+
+
+
 
         }
 
