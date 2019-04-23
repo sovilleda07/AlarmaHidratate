@@ -17,11 +17,7 @@ import com.example.alarmahidratate.Historial
 
 import com.example.alarmahidratate.R
 import com.example.alarmahidratate.interfaces.RecyclerHistorialListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_fragment_historial.*
+import com.google.firebase.database.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -41,12 +37,10 @@ class FragmentHistorial : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private lateinit var v : View
-
-    private lateinit var elrv: RecyclerView
-
-    private val historialList: ArrayList<Historial> = ArrayList()
+    // Variables necesarias para el Fragment
+    private val historialList: MutableList<Historial> = mutableListOf()
     private lateinit var adapter: AdaptadorHistorial
+    lateinit var ref: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,50 +55,55 @@ class FragmentHistorial : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_fragment_historial, container, false)
+        // Creamos una variable de tipo vista para almacenar el fragment que se infla y después retornarla
+        val vista = inflater.inflate(R.layout.fragment_fragment_historial, container, false)
+        // Hacemos un mapeo del RecyclerView que se encuentra en el layout del Fragment
+        val rvHistorial = vista.findViewById<RecyclerView>(R.id.rvHistorial)
+        // Creamos una variable para manejar el recycler en el fragment
+        val layoutManager =  LinearLayoutManager(context)
 
-        val layoutManager = LinearLayoutManager(activity)
-        adapter = AdaptadorHistorial(historialList, object : RecyclerHistorialListener {
-            override fun onClick(historial: Historial, position: Int) {
-                Toast.makeText(activity, "${historial.consumo}", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onLongClick(historial: Historial, position: Int) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })
-
-        elrv = v.findViewById(R.id.rvHistorial)
-
-
-        elrv.setHasFixedSize(true)
-        elrv.layoutManager = layoutManager
-        elrv.itemAnimator = DefaultItemAnimator()
-        elrv.adapter = adapter
-
-        cargarHistorial()
-
-        return v
-    }
-    // Función para cargar el historial de consumo del usuario actual
-    private fun cargarHistorial() {
-        // Hacemos referencia al nodo que contiene todos los consumos del usuario
-        val refHistorial = FirebaseDatabase.getInstance().getReference("/historial/${Datos.idUsuarioFB}")
-        refHistorial.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(p0: DataSnapshot) {
-                // Creamos una variable de tipo Historial para traer toda la informacion
-                val historial = p0.getValue(Historial::class.java)
-                if (historial != null) {
-                    historialList.add(historial)
-                }
-
-
-            }
-
+        // Creamos la referencia a la BD filtrando con el id del Usuario en curso
+        val ref = FirebaseDatabase.getInstance().getReference("/historial/${Datos.idUsuarioFB}").orderByChild("fecha").equalTo("21 Abril 2019")
+        // Creamos el evento para leer desde Firebase
+        ref.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                Toast.makeText(activity, getString(R.string.errorcarga), Toast.LENGTH_SHORT).show()
             }
+            // Si se cargan los datos
+            override fun onDataChange(p0: DataSnapshot) {
+                // Realizamos un ciclo for para poder recorrer todos los subnodos o nodos hijos
+                // que dieron como resultado según la referencia hecha al inicio (filtrado)
+                for (h in p0.children){
+                    // En la siguiente variable almacenaremos el objeto de tipo Historial que
+                    // trae todos los datos de Firebase y después se agregan en la Lista Mutable creada anteriormente
+                    val historial = h.getValue(Historial::class.java)
+                    if (historial != null) {
+                        historialList.add(historial)
+                    }
+                }
+                // Llamos al adaptador para hacer el enlace entre la Base de Datos en Firebase y
+                // el template de nuestro RecyclerView
+                adapter = AdaptadorHistorial(historialList, object : RecyclerHistorialListener {
+                    override fun onClick(historial: Historial, position: Int) {
+                        Toast.makeText(activity,"Se seleccionó", Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onLongClick(historial: Historial, position: Int) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+                })
+
+                // Establecemos propiedades al RecyclerView
+                rvHistorial.setHasFixedSize(true)
+                rvHistorial.layoutManager = layoutManager
+                rvHistorial.itemAnimator = DefaultItemAnimator()
+                rvHistorial.adapter = adapter
+
+
+            }
+
         })
+        return vista
 
     }
 
@@ -117,7 +116,7 @@ class FragmentHistorial : Fragment() {
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
     }
 
