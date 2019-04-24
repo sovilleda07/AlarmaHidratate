@@ -161,7 +161,7 @@ class FragmentConfiguracion : Fragment() {
             val nuevoNombre = editText.text.toString().trim()
 
             // Si el nombre está vacío, no permitir
-            if (nuevoNombre.isEmpty()){
+            if (nuevoNombre.isEmpty() || nuevoNombre.isBlank()){
                 editText.error = "Ingrese un nombre"
                 Toast.makeText(activity, "Ingrese un nombre", Toast.LENGTH_SHORT ).show()
             }
@@ -210,16 +210,16 @@ class FragmentConfiguracion : Fragment() {
         // Cuando se presione el botón de actualizar
         builder.setPositiveButton("Actualizar") { dialog, which ->
             // Tomamos el valor del editText escrito
-            val nuevoPeso = editText.text.toString().toDouble()
+            val nuevoPeso = editText.text.toString()
 
             // Si el peso ingresado es 0, no permitir actualizar
-            if (nuevoPeso == 0.00){
+            if (nuevoPeso.isEmpty() || nuevoPeso.isBlank() || nuevoPeso.toDouble() == 0.00){
                 editText.error = "Ingrese un valor diferente a cero"
                 Toast.makeText(activity, "Ingrese un valor diferente a cero", Toast.LENGTH_SHORT ).show()
             }
             else{
                 // Llamamos a la función para actualizar al nuevo peso
-                actualizarPeso(nuevoPeso)
+                actualizarPeso(nuevoPeso.toDouble())
             }
 
         }

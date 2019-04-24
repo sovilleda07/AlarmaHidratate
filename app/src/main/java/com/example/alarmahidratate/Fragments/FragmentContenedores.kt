@@ -23,15 +23,6 @@ import kotlinx.android.synthetic.main.fragment_fragment_contenedores.view.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [FragmentContenedores.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [FragmentContenedores.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class FragmentContenedores : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
@@ -125,20 +116,20 @@ class FragmentContenedores : Fragment() {
                 // Cuando se presione el botón de actualizar
                 builder.setPositiveButton("Actualizar") { dialog, which ->
                     // Tomamos el valor del editText escrito
-                    val tamano = editText.text.toString().toInt()
+                    val tamano = editText.text.toString()
 
                     // Si el tamaño ingresado es 0, no permitir actualizar
-                    if (tamano == 0){
+                    if (tamano.isEmpty() ||tamano.isBlank() || tamano.toInt() == 0){
                         editText.error = "Ingrese un valor diferente a cero"
                         Toast.makeText(activity, "Ingrese un valor diferente a cero", Toast.LENGTH_SHORT).show()
                         editText.requestFocus()
                     }
                     else{
                         // Verificamos que el tamaño nuevo del contenedor está permitido
-                        if (tamano < valorTaza){
+                        if (tamano.toInt() < valorTaza){
                             // Si está permitido, llamamos la función que actualizará el tamaño
                             // enviando como parámetro el nombre del contenedor y su tamaño
-                            this.actualizarContenedor(nombreContenedor,tamano)
+                            this.actualizarContenedor(nombreContenedor,tamano.toInt())
                         }
                         else{
                             // sino, mostramos un mensaje de error
@@ -168,19 +159,19 @@ class FragmentContenedores : Fragment() {
                 // Cuando se presione el botón de actualizar
                 builder.setPositiveButton("Actualizar") { dialog, which ->
                     // Tomamos el valor del editText escrito
-                    val tamano = editText.text.toString().toInt()
+                    val tamano = editText.text.toString()
 
                     // Si el tamaño ingresado es 0, no permitir actualizar
-                    if (tamano == 0){
+                    if (tamano.isEmpty() ||tamano.isBlank() || tamano.toInt() == 0){
                         Toast.makeText(activity, "Ingrese un valor diferente a cero", Toast.LENGTH_SHORT).show()
                         editText.requestFocus()
                     }
                     else{
                         // Verificamos que el tamaño nuevo del contenedor está permitido
-                        if (tamano > valorVaso && tamano < valorBotella){
+                        if (tamano.toInt() > valorVaso && tamano.toInt() < valorBotella){
                             // Si está permitido, llamamos la función que actualizará el tamaño
                             // enviando como parámetro el nombre del contenedor y su tamaño
-                            this.actualizarContenedor(nombreContenedor,tamano)
+                            this.actualizarContenedor(nombreContenedor,tamano.toInt())
                         }
                         else {
                             // sino, mostramos un mensaje de error
@@ -210,19 +201,19 @@ class FragmentContenedores : Fragment() {
                 // Cuando se presione el botón de actualizar
                 builder.setPositiveButton("Actualizar") { dialog, which ->
                     // Tomamos el valor del editText escrito
-                    val tamano = editText.text.toString().toInt()
+                    val tamano = editText.text.toString()
 
                     // Si el tamaño ingresado es 0, no permitir actualizar
-                    if (tamano == 0){
+                    if (tamano.isEmpty() ||tamano.isBlank() || tamano.toInt() == 0){
                         Toast.makeText(activity, "Ingrese un valor diferente a cero", Toast.LENGTH_SHORT).show()
                         editText.requestFocus()
                     }
                     else{
                         // Verificamos que el tamaño nuevo del contenedor está permitido
-                        if (tamano > valorTaza) {
+                        if (tamano.toInt() > valorTaza) {
                             // Si está permitido, llamamos la función que actualizará el tamaño
                             // enviando como parámetro el nombre del contenedor y su tamaño
-                            this.actualizarContenedor(nombreContenedor,tamano)
+                            this.actualizarContenedor(nombreContenedor,tamano.toInt())
                         }
                         else {
                             // sino, mostramos un mensaje de error
@@ -331,10 +322,10 @@ class FragmentContenedores : Fragment() {
         // Hacemos la actualización del tamano
         referenciaContenedor.child("tamano").setValue(nuevoTamano)
             .addOnSuccessListener {
-                Toast.makeText(activity,"Vaso actualizado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,"Contenedor actualizado", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
-                Toast.makeText(activity, "Vaso error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Error al actualizar", Toast.LENGTH_SHORT).show()
             }
     }
 

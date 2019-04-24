@@ -43,14 +43,14 @@ class DatosGenerales : AppCompatActivity() {
     //  Funcion para validar el ingreso de todos lo datos y registrar al usuario
     private fun registrar(){
         // Validar que se introduzcan campos llenos
-        if (etCorreo.text.toString().isEmpty() || etContrasena.text.toString().isEmpty() || etNombre.text.toString().isEmpty() || etPeso.text.toString().isEmpty() || !(rbFemenino.isChecked || rbMasculino.isChecked)) {
+        if (etCorreo.text.toString().isEmpty() || etCorreo.text.toString().isBlank()|| etContrasena.text.toString().isEmpty() || etContrasena.text.toString().isBlank() || etNombre.text.toString().isEmpty() || etNombre.text.toString().isBlank()|| etPeso.text.toString().isEmpty() || etPeso.text.toString().isBlank() || etPeso.text.toString().toDouble() <= 0 || !(rbFemenino.isChecked || rbMasculino.isChecked)) {
             Toast.makeText(this, getString(R.string.errorDatos),Toast.LENGTH_SHORT).show()
         }else{
 
             // Variable para almacenar almacenar los valores de los layouts
-            val correo= etCorreo.text.toString()
-            val contrasena= etContrasena.text.toString()
-            val nombreUsuario = etNombre.text.toString()
+            val correo= etCorreo.text.toString().trim()
+            val contrasena= etContrasena.text.toString().trim()
+            val nombreUsuario = etNombre.text.toString().trim()
             val peso= etPeso.text.toString().toDouble()
             var genero = ""
 
@@ -104,7 +104,7 @@ class DatosGenerales : AppCompatActivity() {
         // Insertamos en Firebase
         referenciaBaseDatos.setValue(usuario)
             .addOnSuccessListener {
-                Toast.makeText(this, "Se ha guardado con exito el usuario", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Se ha guardado con exito el usuario", Toast.LENGTH_SHORT).show()
 
                 // Guardaremos los contenedores para el usuario recien creado
                 guardarContenedores(idUsuarioFB)
@@ -143,7 +143,7 @@ class DatosGenerales : AppCompatActivity() {
         for ((indice, item) in contenedoresUsuario.withIndex()){
             referenciaBDContenedor.child("${contenedoresUsuario[indice].nombre}-${idUsuario}").setValue(item)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Se ha guardado el contenedor", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, "Se ha guardado el contenedor", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Error al guardar contenedor", Toast.LENGTH_SHORT).show()

@@ -1,6 +1,7 @@
 package com.example.alarmahidratate.Fragments
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.net.Uri
 import android.os.Build
@@ -277,12 +278,36 @@ class FragmentTabs : Fragment() {
         referenciaUsuario.child(Datos.idUsuarioFB).child("consumoIngresado").setValue(consumoActual)
             .addOnSuccessListener {
                 Toast.makeText(activity, "Consumo actualizado", Toast.LENGTH_SHORT).show()
+                if (consumoActual > Datos.consumoUsuario)
+                { showDialog()}
             }
             .addOnFailureListener {
                 Toast.makeText(activity, "Error consumo ingresado", Toast.LENGTH_SHORT).show()
             }
         // Volvemos a cargar los datos del usuario después de realizar la inserción
         this.cargarDatos()
+
+    }
+
+    private fun showDialog(){
+        // Creamos un AlertDialog
+        val builder = AlertDialog.Builder(activity)
+
+        // Colocamos un título
+        builder.setTitle("Advertencia")
+
+        // Colocamos un mensaje
+        builder.setMessage("El consumo en exceso de agua puede causar problemas de salud.")
+
+        // Cuando presione el botón de Ok
+        builder.setPositiveButton("Ok") { dialog, which ->
+            dialog.cancel()
+        }
+
+        // Creamos nuestra alerta
+        val alert = builder.create()
+        // Y la mostramos
+        alert.show()
 
     }
 
