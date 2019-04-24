@@ -77,7 +77,7 @@
     <string name="laFecha">Fecha</string>
     <string name="laHora">Hora</string>
     <string name="nombreContenedor">Contenedor</string>
-    <string name="consumo">Consumo</string>
+    <string name="consumo">Consumo total</string>
 
     <!-- TEXTO FRAGMENT CONFIGURACIÓN-->
     <string name="general">General</string>
