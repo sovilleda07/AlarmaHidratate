@@ -24,6 +24,10 @@
                 android:id="@+id/nav_information"
                 android:icon="@drawable/ic_information"
                 android:title="@string/nav_informacion"/>
+        <item
+                android:id="@+id/nav_cerrarsesion"
+                android:icon="@drawable/ic_out"
+                android:title="@string/nav_cerrar"/>
     </group>
 
 </menu>
